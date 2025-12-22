@@ -1,10 +1,12 @@
+/* --- Container Layout --- */
 .maindiv1 {
-  display: inline-flex; /* Changed from flex to inline-flex */
-  flex-direction: row;  /* Ensure items are side-by-side */
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin: 20px 10px;    /* Added horizontal margin for spacing between buttons */
-  width: auto;          /* Changed from 100% to auto */
+  margin: 30px 0;
+  width: 100%;
 }
+
 /* --- The Button Base --- */
 .stream-btn {
   position: relative;
@@ -22,7 +24,7 @@
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn-text {
+.btn-tex1t {
   font-family: 'WanoQuin', 'Arial Black', sans-serif;
   color: #ffffff;
   font-size: 1.4rem;
@@ -39,10 +41,11 @@
 
 /* UPCOMING: Greyed out / Locked */
 .upcoming {
-  background-color: #1a0801;
-  border-color: #555;
+  background-color: #4a4a4a;
+  border-color: #777;
+  opacity: 0.8;
+  pointer-events: none;
 }
-
 
 /* COMPLETED: Darker Earthy Tone */
 .completed {

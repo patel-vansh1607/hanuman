@@ -1,5 +1,8 @@
 .App {
   text-align: center; 
+  background-color: #e2ce8f;
+  width: 100%;
+  height: 100vh;
 }
 
 .App-logo {
@@ -39,4 +42,36 @@
 
 .image1{
   width: 100%;
+}
+
+.btn-text {
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  padding: 5px;
+  width: 300px;
+  height: 100%;
+  font-size: 1.0rem;
+  white-space: nowrap;
+  background-color: #a74620;
+  border-color: #ac8686;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.btn-text:hover {
+  background-color: #2d0c01; /* Deep Bajrangi Maroon on hover */
+  border-color: #e77930; /* Saffron Border on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.all{
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ttt {
+  font-family: 'Poppins', 'Arial Black', sans-serif;
+  font-weight: 700;
+  color: #b5090e;
 }
