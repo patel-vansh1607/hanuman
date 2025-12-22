@@ -1,0 +1,102 @@
+/* --- Container Layout --- */
+.maindiv1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0;
+  width: 100%;
+}
+
+.selection-text {
+  font-family: 'Poppins', sans-serif;
+  color: #2d0c01;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+/* --- The Button Base --- */
+.stream-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 45px;
+  min-width: 320px;
+  text-decoration: none;
+  border-radius: 12px;
+  background-color: #2d0c01; 
+  border: 2px solid #e77930;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Smooth color transitions only */
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-text {
+  font-family: 'WanoQuin', sans-serif;
+  color: #ffffff;
+  font-size: 1.4rem;
+  white-space: nowrap;
+}
+
+/* --- Status Specific Styling --- */
+.live {
+  border-color: #ff4d4d;
+}
+
+.upcoming {
+  background-color: #4a4a4a;
+  border-color: #777;
+  cursor: not-allowed;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.completed {
+  background-color: #1a0801;
+  border-color: #555;
+}
+
+/* --- The Top Badge --- */
+.status-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%); /* Keeps badge centered */
+  background-color: #e77930;
+  color: #2d0c01;
+  padding: 3px 14px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  border-radius: 20px;
+  border: 2px solid #2d0c01;
+}
+
+/* --- The Pulse Icon --- */
+.live-pulse {
+  width: 12px;
+  height: 12px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  animation: pulse-ring 1.5s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+  100% { box-shadow: 0 0 0 0px rgba(255, 0, 0, 0); }
+}
+
+/* --- HOVER EFFECTS (Stable - No Movement) --- */
+.stream-btn:not(.upcoming):hover {
+  background-color: #3d1405; /* Changes shade */
+  border-color: #ffd700;     /* Border turns Gold */
+  box-shadow: 0 0 20px rgba(231, 121, 48, 0.6); /* Glows outward only */
+}
+
+.stream-btn:not(.upcoming):hover .btn-text {
+  color: #ffd700; /* Text turns Gold */
+}
