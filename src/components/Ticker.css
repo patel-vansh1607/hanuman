@@ -1,0 +1,47 @@
+.ticker-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: #b32d00;
+  color: #fff;
+  padding: 10px 0;
+  /* Change 'fixed' to 'relative' so it occupies space */
+  position: relative; 
+  z-index: 100;
+  border-bottom: 2px solid #ffd700;
+}
+
+.ticker-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll-infinite 30s linear infinite;
+}
+
+.ticker-item-list {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* Prevents the list from squishing */
+}
+
+.ticker-text {
+  font-family: 'WanoQuin-Regular', sans-serif; /* Your uploaded font */
+  white-space: nowrap;
+  padding: 0 40px; /* Space between the phrases */
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+/* The Magic Loop */
+@keyframes scroll-infinite {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Moves the entire track by half its width (one full list) */
+    transform: translateX(-50%);
+  }
+}
+
+/* Stops the ticker when someone wants to read it */
+.ticker-container:hover .ticker-scroll {
+  animation-play-state: paused;
+}
