@@ -10,7 +10,7 @@ function App() {
       <Navbar />
       <Mainbar />
       <div className='img'>
-        <img className = "image1"src="https://res.cloudinary.com/dxgkcyfrl/image/upload/v1766427003/Main_Banner_ni3q4d.jpg" alt="Main_Banner" />
+        <img className = "image1"src="https://res.cloudinary.com/dxgkcyfrl/image/upload/v1766427632/Untitled-1-01_bl5svr.jpg" alt="Main_Banner" />
       </div>
     </div>
   );
