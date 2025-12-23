@@ -3,10 +3,11 @@ import './Ticker.css';
 
 const NewsTicker = () => {
   const newsItems = [
-    "✨ Hanuman Murti Anniversary Celebration ✨",
-    "🙏 Join us for the Grand Puja and Aarti at 6:00 PM 🙏",
-    "🚩 Special Guest Speaker arriving at 10:00 AM 🚩",
-    "🕉️ Happy Anniversary to the Temple Community 🕉️",
+    "Live Stream for Day 1 to begin at 7:00pm",
+    "Don't miss the special cultural performances!",
+    "Join us for the grand inauguration of the Hanuman Murti.",
+    "Stay tuned for live updates throughout the event.",
+    "Visit our website for more details and schedule.",
   ];
 
   return (

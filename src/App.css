@@ -13,7 +13,7 @@
   font-family: 'Poppins', sans-serif;
   color: #ffffff;
   padding: 5px;
-  width: 300px;
+  width: 400px;
   height: 100%;
   font-size: 1.0rem;
   white-space: nowrap;
@@ -21,12 +21,14 @@
   border-color: #ac8686;
   border-radius: 5px;
   text-decoration: none;
+  margin: 30px;
 }
 .btn-text:hover {
   background-color: #2d0c01; /* Deep Bajrangi Maroon on hover */
   border-color: #e77930; /* Saffron Border on hover */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+
 }
 .all{
   gap: 8px;

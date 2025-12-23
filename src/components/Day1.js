@@ -22,7 +22,6 @@ const Day1 = () => {
     allowfullscreen>
   </iframe>
     </div>
-
     </div>
   )
 }
