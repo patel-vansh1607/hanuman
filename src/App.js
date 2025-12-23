@@ -10,8 +10,8 @@ function App() {
       <Navbar />
       <Mainbar />
       <div className='img'>
-        <img className = "image1"src="https://res.cloudinary.com/dxgkcyfrl/image/upload/v1766427632/Untitled-1-01_bl5svr.jpg" alt="Main_Banner" />
-      </div> 
+        <img className = "image1"src="https://res.cloudinary.com/dxgkcyfrl/image/upload/v1766478216/MainBanner_ocytkz.png" alt="Main_Banner" />
+      </div>  
       <p className='ttt'>Please Select the day you want to view</p> 
       <div className="all">
       <a

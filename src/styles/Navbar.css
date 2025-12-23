@@ -12,9 +12,11 @@
   justify-content: center;
   gap: 15px;
   padding: 15px;
-  background-color: #e77930;
+  background-color: #F5D07E;
   width: 100%;
+  z-index: 1000;
   box-sizing: border-box; /* Ensures padding doesn't cause overflow */
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .image {
