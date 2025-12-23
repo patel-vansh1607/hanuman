@@ -1,14 +1,12 @@
 import './App.css';
-import Mainbar from './components/Mainbar';
 import Navbar from './components/Navbar';
 import NewsTicker from './components/NewsTicker';
 import { Link } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      {/* <NewsTicker /> */}
+      <NewsTicker />
       <Navbar />
-      <Mainbar />
       <div className='img'>
         <img className = "image1"src="https://res.cloudinary.com/dxgkcyfrl/image/upload/v1766478216/MainBanner_ocytkz.png" alt="Main_Banner" />
       </div>  

@@ -41,6 +41,9 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   white-space: nowrap;
   color: #2d0c01;
   font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* --- Responsive Styles (Mobile & Tablet) --- */

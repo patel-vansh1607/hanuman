@@ -1,23 +1,27 @@
 import React from 'react'
 import Navbar from './Navbar'
-import '../styles/Day1.css'
+import '../styles/Days.css'
+import { useEffect } from 'react';
+import NewsTicker from './NewsTicker';
+
+
 const Day1 = () => {
+    useEffect(() => {
+    document.title = 'Day 1 | Hanuman Murti Inauguration';
+  }, []);
   return (
     <div className='main-divv'>
+    <NewsTicker />
     <Navbar />
-    <div className='img'>
-        <img className = "image1"src="https://res.cloudinary.com/dxgkcyfrl/image/upload/v1766432264/Untitled-1-02_tjup5p.jpg" alt="Main_Banner" />
-      </div>
     <div className="video-wrapper">
-  <iframe
-    src="https://www.youtube.com/embed/Nh7oLI0438A"
+    <iframe
+    src="https://www.youtube.com/embed/Nh7oLI0438A?autoplay=1&mute=1&playsinline=1&rel=0"
     title="Hanuman Murti Live"
-    frameBorder="0"
+    frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerPolicy="strict-origin-when-cross-origin"
-    allowFullScreen
-  ></iframe>
-</div>
+    allowfullscreen>
+  </iframe>
+    </div>
 
     </div>
   )
