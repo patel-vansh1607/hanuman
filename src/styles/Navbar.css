@@ -39,6 +39,7 @@
 @media (max-width: 768px) {
   .header-nav {
     gap: 6px;
+    align-content: center;
   }
 
   .header-nav a {
