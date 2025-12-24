@@ -49,12 +49,18 @@
   flex-direction: column;
   gap: 1px;
 }
+.ttt{
+  font-size: 20px;
+}
 }
 
 /* ===== EXTRA SMALL PHONES ===== */
 @media (max-width: 480px) {
   .all{
   flex-direction: column;
+}
+.ttt{
+  font-size: 17px;
 }
 }
 
