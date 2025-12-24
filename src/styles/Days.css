@@ -153,17 +153,21 @@
 }
 
 @media screen and (max-width: 600px) {
-  .content-container {
-  flex: 1;                     /* VERY IMPORTANT */
+.content-container {
+  flex: 1;                      /* keep flex growth */
   display: flex;
   flex-direction: column;
-  align-items: center;         /* horizontal */
-  justify-content: center;     /* vertical */
+  align-items: center;          /* horizontal center */
+  justify-content: center;      /* vertical center */
   max-width: 550px;
-  margin: 0 auto;              /* true centering */
-  padding: 20px;
+  width: 90%;                  /* responsive width, 90% of viewport width */
+  box-sizing: border-box;      /* include padding/border in width */
+  padding: 0 15px;             /* padding so content doesn’t touch edges */
+  margin: 0 auto;              /* center horizontally */
   text-align: center;
-} 
+  overflow-wrap: break-word;   /* break long words to prevent overflow */
+}
+
   .p1{
     font-size: 18px;
   }
