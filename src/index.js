@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Day1 from './components/Day1';
+import Day2 from './components/Day2';
+import Day3 from './components/Day3';
 import NotFound from './components/NotFound';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider, useNavigation } from 'react-router-dom';
@@ -38,9 +40,17 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
   },
+    {
+      path: "/live-day-1-hanuman-murti-inaugration",
+      element: <Day1 />,
+    },
   {
-    path: "/live-day-1-hanuman-murti-inaugration",
-    element: <Day1 />,
+    path: "/live-day-2-hanuman-murti-inaugration",
+    element: <Day2 />,
+  },
+  {
+    path: "/live-day-3-hanuman-murti-inaugration",
+    element: <Day3 />,
   },
   {
     path: "*",

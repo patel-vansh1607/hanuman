@@ -3,11 +3,11 @@ import NewsTicker from './NewsTicker';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import '../styles/Days.css';
-const Day1 = () => {
+const Day3 = () => {
   const [isLive, setIsLive] = useState(true); // ONE CHANGE
 
   useEffect(() => {
-    document.title = 'Day 1 | Hanuman Murti Inauguration';
+    document.title = 'Day 3 | Hanuman Murti Inauguration';
 
     const checkYouTube = async () => {
       try {
@@ -35,7 +35,7 @@ const Day1 = () => {
       <Navbar />
       
       <div className="content-container">
-        <h1 className='p1'>Day 1 | Hanuman Murti Inauguration</h1>
+        <h1 className='p1'>Day 3 | Hanuman Murti Inauguration</h1>
         
         <div className="video-wrapper">
           {isLive ? (
@@ -64,4 +64,4 @@ const Day1 = () => {
     </div>
   );
 };
-export default Day1;
+export default Day3;
