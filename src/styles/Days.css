@@ -153,30 +153,40 @@
 }
 
 @media screen and (max-width: 600px) {
-  .not-ready-box {
-    padding: 20px; /* Prevents text from touching screen edges */
+  .content-container {
+  flex: 1;                     /* VERY IMPORTANT */
+  display: flex;
+  flex-direction: column;
+  align-items: center;         /* horizontal */
+  justify-content: center;     /* vertical */
+  max-width: 550px;
+  margin: 0 auto;              /* true centering */
+  padding: 20px;
+  text-align: center;
+} 
+  .p1{
+    font-size: 18px;
   }
-
   .temple-icon {
-    font-size: 45px; /* Shorter icon */
-    margin-bottom: 10px;
+    font-size: 30px; /* Shorter icon */
   }
 
   .not-ready-box h2 {
-    font-size: 22px; /* Smaller heading to fit on one line */
+    font-size: 20px; /* Smaller heading to fit on one line */
     margin: 5px 0;
   }
 
   .not-ready-box p {
-    font-size: 14px; /* Readable but smaller text */
+    font-size: 10px; /* Readable but smaller text */
     max-width: 90%;  /* Ensures it stays inside the box */
     line-height: 1.4;
   }
 
   .status-indicator {
-    margin-top: 15px;
-    padding: 6px 15px;
+      margin-top: 5px;
+      padding: 6px 15px;
     font-size: 12px; /* Smaller status text */
+    padding-bottom: 5px;
   }
 
   .dot {

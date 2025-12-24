@@ -24,4 +24,4 @@ const loaderOverlayStyle = {
   backgroundColor: 'rgba(139, 0, 0, 0.9)', // Matches your footer dark red
   display: 'flex', flexDirection: 'column', justifyContent: 'center',
   alignItems: 'center', zIndex: 9999, color: 'white'
-};
+};w
