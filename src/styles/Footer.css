@@ -1,0 +1,23 @@
+.footer-container {
+  background-color: #8B0000;
+  color: white;
+  text-align: center;
+  padding: 12px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  border-top: 2px solid #f5c518;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.footer-link {
+  color: #f5d07e;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 600px) {
+  .footer-container {
+    font-size: 12px;
+    padding: 10px 5px;
+  }
+}
