@@ -4,11 +4,10 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import '../styles/Days.css';
 const Day3 = () => {
-  const [isLive, setIsLive] = useState(true); // ONE CHANGE
+  const [isLive, setIsLive] = useState(false); // ONE CHANGE
 
   useEffect(() => {
     document.title = 'Day 3 | Hanuman Murti Inauguration';
-
     const checkYouTube = async () => {
       try {
         const response = await fetch(`https://www.youtube.com/watch?v=NTfirXY3sww`);
@@ -49,7 +48,7 @@ const Day3 = () => {
           ) : (
             <div className="not-ready-box">
                <div className="temple-icon">🕉️</div>
-               <h2>Darshan Starts Soon</h2>
+               <h2>Live Stream Not Available</h2>
                <p>The spiritual proceedings for Day 3 are being prepared.</p>
                <div className="status-indicator">
                  <span className="dot"></span>

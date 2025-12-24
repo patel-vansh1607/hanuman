@@ -1,17 +1,26 @@
 @font-face {
-  font-family: 'WanoQuin'; 
-  src: url('../assets/wano-quin-wano-quin-regular-400.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}/* --- Base Styles (Desktop) --- */
+  font-family: WanoQuin;
+  src: url(../assets/wano-quin-wano-quin-regular-400.ttf);
+}
+
+/* ===== Wrapper ===== */
 .divv {
   width: 100%;
 }
-.header-nav {
-  position: absolute;
-  left: 16px;
-  display: flex;
+
+/* ===== Navbar Layout ===== */
+.main-div {
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
+  padding: 15px 20px;
+  background-color: #F5D07E;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* ===== Left Navigation ===== */
+.header-nav {
+  display: flex;
   gap: 14px;
 }
 
@@ -23,117 +32,84 @@
   padding: 6px 10px;
   border-radius: 6px;
   font-family: 'Poppins', sans-serif;
-  transition: background 0.2s ease;
-    background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.35);
   border: 1px solid rgba(45, 12, 1, 0.2);
   backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
 }
 
-
 .header-nav a:hover {
-    background: #2d0c01;
+  background: #2d0c01;
   color: #fff;
 }
 
-/* ===== MOBILE (HAMBURGER STYLE) ===== */
-@media (max-width: 768px) {
-  .header-nav {
-    gap: 6px;
-    align-content: center;
-  }
-
-  .header-nav a {
-    font-size: 12px;
-    padding: 5px 8px;
-  }
-}
-
-/* ===== EXTRA SMALL PHONES ===== */
-@media (max-width: 480px) {
-  .header-nav {
-    left: 8px;
-  }
-
-  .header-nav a {
-    font-size: 11px;
-    padding: 4px 6px;
-  }
-}
-
-.main-div {
+/* ===== Center Brand ===== */
+.center-brand {
+  justify-self: center;           /* 🔥 TRUE CENTER */
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 15px;
-  padding: 15px;
-  background-color: #F5D07E;
-  width: 100%;
-  z-index: 1000;
-  box-sizing: border-box; /* Ensures padding doesn't cause overflow */
-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-position: relative;
+  text-align: center;
 }
 
+/* ===== Images ===== */
 .image {
   height: 80px;
   width: auto;
   object-fit: contain;
 }
 
-.text .text1 {
+/* ===== Text ===== */
+.text1 {
   margin: 0;
-  font-size: 50px; /* Large desktop size */
+  font-size: 50px;
   font-weight: 500;
-  white-space: nowrap;
   color: #2d0c01;
   font-family: 'WanoQuin', sans-serif;
-}
-
-.text .text2 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 500;
   white-space: nowrap;
-  color: #2d0c01;
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* --- Responsive Styles (Mobile & Tablet) --- */
+.text2 {
+  margin: 0;
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  color: #2d0c01;
+}
+
+/* ===== Tablet & Mobile ===== */
 @media (max-width: 768px) {
   .main-div {
-    /* Forces everything to stay side-by-side */
-    flex-direction: row !important; 
-    flex-wrap: nowrap;
-    justify-content: center;
+    grid-template-columns: 1fr;
     gap: 8px;
-    padding: 10px;
   }
 
-  .text .text1 {
-    font-size: 20px; /* Further reduction to prevent horizontal scroll */
-    font-weight: 600;
+  .header-nav {
+    justify-content: center;
   }
-  .text .text2 {
-    font-size: 8px;
+
+  .center-brand {
+    gap: 10px;
   }
+
   .image {
     height: 50px;
+  }
+
+  .text1 {
+    font-size: 22px;
+  }
+
+  .text2 {
+    font-size: 10px;
   }
 }
 
-/* --- Extra Small Phones (iPhone SE size) --- */
+/* ===== Small Phones ===== */
 @media (max-width: 380px) {
-  .text .text1 {
-    font-size: 20px; /* Further reduction to prevent horizontal scroll */
-    font-weight: 600;
+  .text1 {
+    font-size: 20px;
   }
-  .text .text2 {
-    font-size: 8px;
-  }
-  .image {
-    height: 50px;
+  .text2 {
+    font-size: 9px;
   }
 }

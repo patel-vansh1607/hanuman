@@ -48,8 +48,8 @@ const Day2 = () => {
           ) : (
             <div className="not-ready-box">
                <div className="temple-icon">🕉️</div>
-               <h2>Darshan Starts Soon</h2>
-               <p>The spiritual proceedings for Day 3 are being prepared.</p>
+               <h2>Live Stream Not Available</h2>
+               <p>The spiritual proceedings for Day 2 are being prepared.</p>
                <div className="status-indicator">
                  <span className="dot"></span>
                  Monitoring Live Stream

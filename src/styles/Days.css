@@ -1,7 +1,8 @@
+
 .video-wrapper {
-  max-width: 100%;          /* controls size (not too big) */
-  margin: 25px auto;          /* space from top + centered */
-  padding: 14px;              /* padding like your image */
+  max-width: 100%;
+  margin: 25px auto;
+  padding: 14px;
   background: #fbf7e6;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
   aspect-ratio: 16 / 9;
@@ -27,11 +28,17 @@
 
 /* Container to keep everything neat */
 .content-container {
+  flex: 1;                     /* VERY IMPORTANT */
+  display: flex;
+  flex-direction: column;
+  align-items: center;         /* horizontal */
+  justify-content: center;     /* vertical */
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0 auto;              /* true centering */
   padding: 20px;
   text-align: center;
 }
+
 
 
 
@@ -60,7 +67,7 @@
   align-items: center;
   background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
   color: white;
-  padding: 40px;
+
 }
 
 .temple-icon {
@@ -126,4 +133,19 @@
   .video-wrapper {
    width: 100%;
   }
+  .content-container {
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.not-ready-box{
+    max-height: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 }
