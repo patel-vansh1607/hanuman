@@ -127,6 +127,9 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
+  .not-ready-box{
+    padding: 0 10px;
+  }
   .not-ready-box h2 { font-size: 24px; }
   .not-ready-box p { font-size: 14px; }
   .temple-icon { font-size: 40px; }
@@ -147,5 +150,37 @@
   align-items: center;
   justify-content: center;
 }
+}
 
+@media screen and (max-width: 600px) {
+  .not-ready-box {
+    padding: 20px; /* Prevents text from touching screen edges */
+  }
+
+  .temple-icon {
+    font-size: 45px; /* Shorter icon */
+    margin-bottom: 10px;
+  }
+
+  .not-ready-box h2 {
+    font-size: 22px; /* Smaller heading to fit on one line */
+    margin: 5px 0;
+  }
+
+  .not-ready-box p {
+    font-size: 14px; /* Readable but smaller text */
+    max-width: 90%;  /* Ensures it stays inside the box */
+    line-height: 1.4;
+  }
+
+  .status-indicator {
+    margin-top: 15px;
+    padding: 6px 15px;
+    font-size: 12px; /* Smaller status text */
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+  }
 }
