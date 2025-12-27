@@ -25,7 +25,7 @@ const Contact = () => {
                 "Service to humanity is the highest form of worship. Our doors are always open for the devotees."
               </p>
               <div className="chairman-actions">
-                <a href="https://wa.me/91748660944" className="pill-btn wa">💬 WhatsApp</a>
+                <a href="https://wa.me/254748660944" className="pill-btn wa">💬 WhatsApp</a>
                 <a href="mailto:chairman@hanuman.com" className="pill-btn mail">✉️ Email</a>
               </div>
             </div>

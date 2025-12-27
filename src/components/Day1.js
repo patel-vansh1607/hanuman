@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import '../styles/Days.css';
 const Day1 = () => {
-  const [isLive, setIsLive] = useState(false); // ONE CHANGE
+  const [isLive, setIsLive] = useState(true); // ONE CHANGE
 
   useEffect(() => {
     document.title = 'Day 1 | Hanuman Murti Inauguration';
