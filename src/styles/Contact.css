@@ -1,0 +1,196 @@
+.contact-page-wrapper {
+  background: #fdfaf0; /* Creamy spiritual background */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-content {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+/* --- CHAIRMAN SECTION --- */
+.chairman-section {
+  background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+  border-radius: 30px;
+  padding: 50px;
+  color: white;
+  margin-bottom: 40px;
+  box-shadow: 0 25px 50px rgba(139, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Adds a subtle texture to the background */
+.chairman-section::before {
+  content: "🕉️";
+  position: absolute;
+  right: -50px;
+  bottom: -50px;
+  font-size: 300px;
+  opacity: 0.05;
+}
+
+.chairman-card {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.gold-ring {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(45deg, #f5c518, #ffecb3, #f5c518);
+  box-shadow: 0 0 20px rgba(245, 197, 24, 0.5);
+}
+
+.portrait-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #2d0c01;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+}
+
+.rank-tag {
+  background: #f5c518;
+  color: #2d0c01;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.chairman-info h1 {
+  font-size: 42px;
+  margin: 10px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.chairman-quote {
+  font-style: italic;
+  font-size: 18px;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-bottom: 25px;
+}
+
+.contact-pill {
+  display: inline-block;
+  padding: 12px 25px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+  transition: 0.3s;
+}
+
+.contact-pill:hover {
+  background: #f5c518;
+  color: #2d0c01;
+  transform: scale(1.05);
+}
+
+/* --- INTERACTION BOXES --- */
+.interaction-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.interaction-box {
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border: 1px solid #eee;
+  transition: 0.4s;
+}
+
+.interaction-box:hover {
+  border-color: #f5c518;
+  transform: translateY(-5px);
+}
+
+.box-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.live-icon {
+  color: #ff0000;
+  animation: blink 1s infinite;
+}
+
+.action-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  background: #fdf6e3;
+  color: #8B0000;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.action-btn:hover {
+  background: #8B0000;
+  color: white;
+}
+
+/* --- BOTTOM INFO BAR --- */
+.floating-location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  gap: 40px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+
+.loc-divider {
+  width: 2px;
+  height: 40px;
+  background: #eee;
+}
+
+.loc-item strong {
+  display: block;
+  color: #8B0000;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+  .chairman-card { flex-direction: column; text-align: center; gap: 20px; }
+  .chairman-section { padding: 30px 20px; }
+  .interaction-grid { grid-template-columns: 1fr; }
+  .floating-location { flex-direction: column; gap: 20px; }
+  .loc-divider { display: none; }
+  .chairman-info h1 { font-size: 30px; }
+}
+
+@keyframes blink { 
+  0%, 100% { opacity: 1; } 
+  50% { opacity: 0; } 
+}

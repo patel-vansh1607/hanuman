@@ -8,7 +8,7 @@ import Day3 from './components/Day3';
 import NotFound from './components/NotFound';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider, useNavigation } from 'react-router-dom';
-
+import Contact from './components/Contact';
 // This component detects the actual route transitions
 const RootLayout = () => {
   const navigation = useNavigation();
@@ -55,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
   },
 ]);
 
