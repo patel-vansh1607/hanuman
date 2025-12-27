@@ -8,62 +8,63 @@ const Contact = () => {
     <div className="contact-page-wrapper">
       <Navbar />
       
-      <div className="contact-content">
-        {/* --- SECTION 1: CHAIRMAN SPOTLIGHT --- */}
-        <section className="chairman-section">
+      <main className="contact-main-content">
+        {/* SECTION 1: CHAIRMAN */}
+        <section className="chairman-hero">
           <div className="chairman-card">
-            <div className="chairman-image-area">
+            <div className="chairman-visual">
               <div className="gold-ring">
-                {/* Replace with actual image of Chairman */}
-                <div className="portrait-placeholder">🙏</div>
+                <div className="portrait-box">🙏</div>
               </div>
             </div>
-            <div className="chairman-info">
+            
+            <div className="chairman-details">
               <span className="rank-tag">Chairman</span>
               <h1>Shri Sailesh Seth</h1>
-              <p className="chairman-quote">"Service to humanity is the highest form of worship. Our doors are always open for the devotees of Lord Hanuman."</p>
-              <div className="chairman-contact-row">
-                <a href="https://wa.me/0748660944" className="contact-pill">💬 WhatsApp</a>
-                <a href="mailto:chairman@hanuman.com" className="contact-pill">✉️ Official Email</a>
+              <p className="chairman-quote">
+                "Service to humanity is the highest form of worship. Our doors are always open for the devotees."
+              </p>
+              <div className="chairman-actions">
+                <a href="https://wa.me/91748660944" className="pill-btn wa">💬 WhatsApp</a>
+                <a href="mailto:chairman@hanuman.com" className="pill-btn mail">✉️ Email</a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* --- SECTION 2: SLEEK INTERACTION GRID --- */}
+        {/* SECTION 2: GRID */}
         <div className="interaction-grid">
-          <div className="interaction-box tech">
-            <div className="box-header">
-               <span className="live-icon">●</span>
+          <div className="i-box">
+            <div className="i-header">
+               <span className="dot-live">●</span>
                <h3>Telecast Support</h3>
             </div>
             <p>Experiencing issues with the Live Stream or Audio?</p>
-            <button className="action-btn">Report Issue</button>
+            <button className="action-link">Report Issue</button>
           </div>
 
-          <div className="interaction-box seva">
-            <div className="box-header">
-               <span className="seva-icon">🕉️</span>
+          <div className="i-box">
+            <div className="i-header">
+               <span className="om-icon">🕉️</span>
                <h3>General Inquiries</h3>
             </div>
-            <p>Questions regarding Prasad, Darshan timings, or Seva.</p>
-            <button className="action-btn">Contact Desk</button>
+            <p>Questions regarding Prasad, Darshan, or Seva.</p>
+            <button className="action-link">Contact Desk</button>
           </div>
         </div>
 
-        {/* --- SECTION 3: FLOATING FOOTER INFO --- */}
-        <div className="floating-location">
-          <div className="loc-item">
+        {/* SECTION 3: LOCATION BAR */}
+        <div className="info-bar">
+          <div className="info-item">
             <strong>Location</strong>
             <span>Main Temple Complex, Highway 44</span>
           </div>
-          <div className="loc-divider"></div>
-          <div className="loc-item">
-            <strong>Inauguration Dates</strong>
+          <div className="info-item border-left">
+            <strong>Dates</strong>
             <span>March 15th - 20th, 2025</span>
           </div>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>
