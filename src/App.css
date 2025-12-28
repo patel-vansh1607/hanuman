@@ -1,4 +1,4 @@
-/* RESET - Essential to prevent "crossing" */
+/* --- 1. GLOBAL RESET --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,63 +7,162 @@
 
 html, body, #root {
   height: 100%;
+  background-color: #e2ce8f; /* Your theme gold/tan background */
+  font-family: 'Poppins', sans-serif;
 }
 
 .App {
   text-align: center; 
-  background-color: #e2ce8f;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Forces App to fill screen */
+  min-height: 100vh;
 }
 
+/* --- 2. HEADER & TEXT --- */
 .image1 {
   width: 100%;
   display: block;
+  height: auto;
 }
 
 .ttt {
-  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   color: #b5090e;
   font-size: 25px;
-  margin: 20px 0;
+  margin: 30px 0 10px 0;
+  padding: 0 15px;
 }
 
-/* BUTTON CONTAINER */
+/* --- 3. BUTTON CONTAINER --- */
 .all {
-  flex: 1; /* PUSHES FOOTER TO BOTTOM */
+  flex: 1; /* Pushes Footer to bottom */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-bottom: 50px; /* Space above footer */
+  padding: 20px 0 60px 0;
 }
 
+/* --- 4. THE PREMIUM BUTTON BASE --- */
 .btn-text {
-  font-family: 'Poppins', sans-serif;
-  color: #ffffff;
-  padding: 15px 20px;
-  width: 90%;
-  max-width: 400px;
-  font-size: 1.1rem;
-  background-color: #a74620;
-  border: 1px solid #f5c518;
-  border-radius: 8px;
+  position: relative; /* Essential for floating badges */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  margin: 10px 0;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background-color: #a74620; /* Deep terracotta/brown */
+  border: 2px solid #f5c518; /* Gold border */
+  border-radius: 12px;
+  padding: 20px 20px; /* Tall padding for badge clearance */
+  width: 90%;
+  max-width: 500px;
+  margin: 25px 0; 
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
 .btn-text:hover {
   background-color: #2d0c01;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-/* RESPONSIVE */
+.btn-text span {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+/* --- 5. FLOATING BADGES LOGIC --- */
+.status-badge {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 10;
+  pointer-events: none; /* Keeps button clickable */
+}
+
+/* LIVE NOW: Floating Glow in Top Center */
+.status-badge.live {
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  border: 1.5px solid #fff;
+  padding: 6px 16px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 15px rgba(255, 75, 43, 0.6);
+  animation: float-pulse 2s infinite ease-in-out;
+}
+
+/* COMPLETED: Folded Tab look in Top Right */
+.status-badge.done {
+  top: -10px;
+  right: 15px;
+  color: #d4c18d; /* Muted gold tab */
+  background-color: #2d0c01;
+  border: 1px solid #a74620;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* UPCOMING: Outlined Tab look in Top Right */
+.status-badge.upcoming {
+  top: -10px;
+  right: 15px;
+  background-color: #d4c18d; /* Muted gold tab */
+  color: #2d0c01;
+  border: 1px solid #a74620;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* --- 6. ANIMATIONS --- */
+.dot.pulse {
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  animation: blink-dot 0.8s infinite;
+}
+
+@keyframes float-pulse {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.2); }
+}
+
+/* --- 7. MOBILE RESPONSIVE --- */
 @media (max-width: 600px) {
-  .ttt { font-size: 18px; padding: 0 10px; }
-  .btn-text { font-size: 0.95rem; width: 85%; }
+  .ttt { font-size: 19px; }
+  .btn-text {
+    padding: 25px 15px;
+    width: 92%;
+    margin: 20px 0;
+  }
+  .btn-text span {
+    font-size: 1rem;
+  }
+  .status-badge.live {
+    font-size: 9px;
+    top: -12px;
+    padding: 4px 12px;
+  }
+  .status-badge.done, .status-badge.upcoming {
+    right: 10px;
+  }
 }

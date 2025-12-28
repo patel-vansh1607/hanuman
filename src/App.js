@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import Footer from './components/Footer';
 import Mainbar from './components/Mainbar';
@@ -5,7 +6,22 @@ import Navbar from './components/Navbar';
 import NewsTicker from './components/NewsTicker';
 import Maintenance from './components/Maintainance';
 
-const IS_MAINTENANCE = false; // Toggle to true for Maintenance mode
+const IS_MAINTENANCE = false; 
+
+// --- The StatusBadge Component ---
+const StatusBadge = ({ status }) => {
+  if (status === 'live') {
+    return (
+      <div className="status-badge live">
+        <span className="dot pulse"></span> LIVE NOW
+      </div>
+    );
+  }
+  if (status === 'completed') {
+    return <div className="status-badge done">COMPLETED</div>;
+  }
+  return <div className="status-badge upcoming">UPCOMING</div>;
+};
 
 function App() {
   if (IS_MAINTENANCE) {
@@ -25,16 +41,28 @@ function App() {
       <p className='ttt'>Please Select the day you want to view</p> 
 
       <div className="all">
+        {/* Day 1 - COMPLETED */}
         <a href="/live-day-1-hanuman-murti-inaugration" className="btn-text">
-          Day 1 | Friday, 23<sup>rd</sup> January 2026
+          <StatusBadge status="upcoming" />
+          <div className="btn-content">
+            <span>Day 1 | Friday, 23rd January 2026</span>
+          </div>
         </a>
 
+        {/* Day 2 - LIVE */}
         <a href="/live-day-2-hanuman-murti-inaugration" className="btn-text">
-          Day 2 | Saturday, 24<sup>th</sup> January 2026
+          <StatusBadge status="upcoming" />
+          <div className="btn-content">
+            <span>Day 2 | Saturday, 24th January 2026</span>
+          </div>
         </a>
 
+        {/* Day 3 - UPCOMING */}
         <a href="/live-day-3-hanuman-murti-inaugration" className="btn-text">
-          Day 3 | Sunday, 25<sup>th</sup> January 2026
+          <StatusBadge status="upcoming" />
+          <div className="btn-content">
+            <span>Day 3 | Sunday, 25th January 2026</span>
+          </div>
         </a>
       </div>
 
