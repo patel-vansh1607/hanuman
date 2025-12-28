@@ -57,11 +57,11 @@ const Contact = () => {
         <div className="info-bar">
           <div className="info-item">
             <strong>Location</strong>
-            <span>Main Temple Complex, Highway 44</span>
+            <span>NAKURU</span>
           </div>
           <div className="info-item border-left">
             <strong>Dates</strong>
-            <span>March 15th - 20th, 2025</span>
+            <span>23rd January 2026 - 25th January 2026</span>
           </div>
         </div>
       </main>

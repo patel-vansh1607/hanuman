@@ -30,11 +30,11 @@ function App() {
         </a>
 
         <a href="/live-day-2-hanuman-murti-inaugration" className="btn-text">
-          Day 2 | Friday, 24<sup>th</sup> January 2026
+          Day 2 | Saturday, 24<sup>th</sup> January 2026
         </a>
 
         <a href="/live-day-3-hanuman-murti-inaugration" className="btn-text">
-          Day 3 | Friday, 25<sup>th</sup> January 2026
+          Day 3 | Sunday, 25<sup>th</sup> January 2026
         </a>
       </div>
 
