@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import NewsTicker from './components/NewsTicker';
 import Maintenance from './components/Maintainance';
 
-const IS_MAINTENANCE = false; 
+const IS_MAINTENANCE = true; 
 
 // --- The StatusBadge Component ---
 const StatusBadge = ({ status }) => {
