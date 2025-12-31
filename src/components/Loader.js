@@ -1,27 +1,29 @@
-import React, { createContext, useState, useContext } from 'react';
+import React from 'react';
 
-const LoaderContext = createContext();
-
-export const LoaderProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
+const Loader = () => {
   return (
-    <LoaderContext.Provider value={{ loading, setLoading }}>
-      {loading && (
-        <div style={loaderOverlayStyle}>
-          <div className="spinner"></div> 
-          <p style={{ marginTop: '10px', color: '#f5c518' }}>Loading Blessings...</p>
-        </div>
-      )}
-      {children}
-    </LoaderContext.Provider>
+    <div style={styles.container}>
+      <div className="spinner"></div>
+      <p style={styles.text}>Loading Content...</p>
+    </div>
   );
 };
 
-export const useLoader = () => useContext(LoaderContext);
+const styles = {
+  container: {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e2ce8f', // Your background color
+  },
+  text: {
+    marginTop: '20px',
+    fontFamily: "'Poppins', sans-serif",
+    color: '#a74620',
+    fontWeight: '600'
+  }
+};
 
-const loaderOverlayStyle = {
-  position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-  backgroundColor: 'rgba(139, 0, 0, 0.9)', // Matches your footer dark red
-  display: 'flex', flexDirection: 'column', justifyContent: 'center',
-  alignItems: 'center', zIndex: 9999, color: 'white'
-};w
+export default Loader;

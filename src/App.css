@@ -166,3 +166,16 @@ html, body, #root {
     right: 10px;
   }
 }
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(167, 70, 32, 0.2);
+  border-top: 5px solid #a74620; /* Your theme brown/orange */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
