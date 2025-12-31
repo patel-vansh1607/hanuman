@@ -12,7 +12,7 @@ const Maintenance = () => {
       textAlign: 'center',
       padding: '20px'
     }}>
-      <div style={{ fontSize: '70px', animation: 'spin 5s linear infinite' }}>🕉️</div>
+      <div style={{ fontSize: '70px' }}>🕉️</div>
       <h1 style={{ color: '#8B0000', fontFamily: 'Poppins', marginTop: '20px' }}>
         Divine Updates in Progress
       </h1>
@@ -20,9 +20,6 @@ const Maintenance = () => {
         We are preparing the digital altar for the Hanuman Murti Inauguration. 
         Please visit us again shortly for the live telecast.
       </p>
-      <style>{`
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      `}</style>
     </div>
   );
 };

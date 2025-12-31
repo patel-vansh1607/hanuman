@@ -3,11 +3,11 @@ import NewsTicker from './NewsTicker';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import '../styles/Days.css';
-const Day3 = () => {
+const Day2Evening = () => {
   const [isLive, setIsLive] = useState(false); // ONE CHANGE
 
   useEffect(() => {
-    document.title = 'Day 3 | Hanuman Dada Murti Inauguration';
+    document.title = 'Day 2 Evening | Hanuman Dada Murti Inauguration';
     const checkYouTube = async () => {
       try {
         const response = await fetch(`https://www.youtube.com/watch?v=NTfirXY3sww`);
@@ -34,7 +34,7 @@ const Day3 = () => {
       <Navbar />
       
       <div className="content-container">
-        <h1 className='p1'>Day 3 | Hanuman Dada Murti Inauguration</h1>
+        <h1 className='p1'>Day 2 Evening Programme | Hanuman Dada Murti Inauguration</h1>
         
         <div className="video-wrapper">
           {isLive ? (
@@ -49,7 +49,7 @@ const Day3 = () => {
             <div className="not-ready-box">
                <div className="temple-icon">🕉️</div>
                <h2>Live Stream Not Available</h2>
-               <p>The spiritual proceedings for Day 3 are being prepared.</p>
+               <p>The spiritual proceedings for Day 2 Evening Programme are being prepared.</p>
                <div className="status-indicator">
                  <span className="dot"></span>
                  Monitoring Live Stream
@@ -63,4 +63,4 @@ const Day3 = () => {
     </div>
   );
 };
-export default Day3;
+export default Day2Evening;

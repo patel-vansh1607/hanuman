@@ -1,66 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import NewsTicker from './NewsTicker';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import '../styles/Days.css';
-const Day2 = () => {
-  const [isLive, setIsLive] = useState(false); // ONE CHANGE
+import React from 'react';
+import '../App.css';
+import Footer from '../components/Footer';
+import Mainbar from '../components/Mainbar';
+import Navbar from '../components/Navbar';
+import NewsTicker from '../components/NewsTicker';
+import Maintenance from '../components/Maintainance';
 
-  useEffect(() => {
-    document.title = 'Day 2 | Hanuman Murti Inauguration';
-    const checkYouTube = async () => {
-      try {
-        const response = await fetch(`https://www.youtube.com/watch?v=NTfirXY3sww`);
-        const text = await response.text();
-        
-        if (text.includes('"isLiveNow":true')) {
-          setIsLive(true);
-        } else {
-          setIsLive(false);
-        }
-      } catch (error) {
-        console.error("Connection busy... retrying.");
-      }
-    }
-    checkYouTube();
-    const interval = setInterval(checkYouTube, 5000); 
-  
-    return () => clearInterval(interval);
-  }, []);
+const IS_MAINTENANCE = false; 
+
+// --- The StatusBadge Component ---
+const StatusBadge = ({ status }) => {
+  if (status === 'live') {
+    return (
+      <div className="status-badge live">
+        <span className="dot pulse"></span> LIVE NOW
+      </div>
+    );
+  }
+  if (status === 'completed') {
+    return <div className="status-badge done">COMPLETED</div>;
+  }
+  return <div className="status-badge upcoming">UPCOMING</div>;
+};
+
+const Day2 = () => {
+  if (IS_MAINTENANCE) {
+    return <Maintenance />;
+  }
 
   return (
-    <div className='main-divv'>
+    <div className="App">
+      <Mainbar />
       <NewsTicker />
       <Navbar />
-      
-      <div className="content-container">
-        <h1 className='p1'>Day 2 | Hanuman Murti Inauguration</h1>
-        
-        <div className="video-wrapper">
-          {isLive ? (
-                <iframe //PUT LINK HERE 
-                src="https://www.youtube.com/embed/Nh7oLI0438A?autoplay=1&mute=1&playsinline=1&rel=0"
-                title="Hanuman Murti Live"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
-          ) : (
-            <div className="not-ready-box">
-               <div className="temple-icon">🕉️</div>
-               <h2>Live Stream Not Available</h2>
-               <p>The spiritual proceedings for Day 2 are being prepared.</p>
-               <div className="status-indicator">
-                 <span className="dot"></span>
-                 Monitoring Live Stream
-               </div>
-            </div>
-          )}
-        </div>
+      <p className='ttt'>Please Select Day or Evening Programme</p> 
+
+      <div className="all">
+        <a href="/live-day-2-hanuman-murti-inaugration/morning-program" className="btn-text">
+          <StatusBadge status="upcoming" />
+          <div className="btn-content">
+            <span>Morning Programme</span>
+          </div>
+        </a>
+        <a href="/live-day-2-hanuman-murti-inaugration/evening-program" className="btn-text">
+          <StatusBadge status="upcoming" />
+          <div className="btn-content">
+            <span>Evening Programme</span>
+          </div>
+        </a>
       </div>
-      
+
       <Footer />
     </div>
   );
-};
+}
+
 export default Day2;

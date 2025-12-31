@@ -7,7 +7,7 @@ const Day1 = () => {
   const [isLive, setIsLive] = useState(false); // ONE CHANGE
 
   useEffect(() => {
-    document.title = 'Day 1 | Hanuman Murti Inauguration';
+    document.title = 'Day 1 | Hanuman Dada Murti Inauguration';
     const checkYouTube = async () => {
       try {
         const response = await fetch(`https://www.youtube.com/watch?v=NTfirXY3sww`);
@@ -34,7 +34,7 @@ const Day1 = () => {
       <Navbar />
       
       <div className="content-container">
-        <h1 className='p1'>Day 1 | Hanuman Murti Inauguration</h1>
+        <h1 className='p1'>Day 1 | Hanuman Dada Murti Inauguration</h1>
         
         <div className="video-wrapper">
           {isLive ? (

@@ -21,7 +21,7 @@ const Navbar = () => {
           />
 
           <div className="text">
-            <p className="text1">Hanuman Murti Inauguration</p>
+            <p className="text1">Hanuman Dada Murti Inauguration</p>
             <p className="text2">
               On the occasion of the 110<sup>th</sup> Anniversary of Krishna Temple Nakuru
             </p>

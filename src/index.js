@@ -9,6 +9,8 @@ import NotFound from './components/NotFound';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider, useNavigation } from 'react-router-dom';
 import Contact from './components/Contact';
+import Day2Morning from './components/Day2Morning';
+import Day2Evening from './components/Day2Evening';
 // This component detects the actual route transitions
 const RootLayout = () => {
   const navigation = useNavigation();
@@ -60,6 +62,14 @@ const router = createBrowserRouter([
     path: "/contact",
     element: <Contact />,
   },
+  {
+    path: "/live-day-2-hanuman-murti-inaugration/morning-program",
+    element: <Day2Morning />,
+  },
+  {
+    path: "/live-day-2-hanuman-murti-inaugration/evening-program",
+    element: <Day2Evening />,
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
