@@ -1,227 +1,222 @@
-/* --- GLOBAL REFINEMENTS --- */
-:root {
-  --primary-gold: #D4AF37;
-  --deep-maroon: #8B0000;
-  --rich-black: #1a0500;
-  --soft-cream: #fdfaf0;
-  --glass-white: rgba(255, 255, 255, 0.9);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+/* RESET & GLOBAL FIX */
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* PREVENTS OVERFLOW/CROSSING */
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  color: var(--rich-black);
-  background-color: var(--soft-cream);
-  line-height: 1.6;
-}
-
 .contact-page-wrapper {
-  overflow-x: hidden;
+  background: #fdfaf0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* Hard stop for horizontal scroll */
   width: 100%;
 }
 
 .contact-main-content {
-  max-width: 1000px;
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 40px 20px;
 }
 
-/* --- CHAIRMAN HERO: ELEVATED DESIGN --- */
+/* CHAIRMAN SECTION */
 .chairman-hero {
-  background: linear-gradient(145deg, var(--deep-maroon), #5e0000);
-  border-radius: 30px;
-  padding: 50px;
+  background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+  border-radius: 24px;
+  padding: 40px;
   color: white;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 40px rgba(139, 0, 0, 0.2);
   position: relative;
-  box-shadow: 0 25px 50px -12px rgba(139, 0, 0, 0.4);
+  overflow: hidden;
 }
 
 .chairman-card {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
 }
 
 .gold-ring {
-  width: 180px;
-  height: 180px;
-  background: linear-gradient(135deg, #FFD700, #FFF5B7, #B8860B);
+  width: 160px;
+  height: 160px;
+  background: linear-gradient(45deg, #f5c518, #fff, #f5c518);
   border-radius: 50%;
-  padding: 6px;
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+  padding: 5px;
+  display: flex;
+  flex-shrink: 0; /* Prevents image from squishing */
 }
 
 .portrait-box {
-  background: var(--rich-black);
+  background: #2d0c01;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 60px;
-  border: 2px solid rgba(255,255,255,0.1);
+  font-size: 50px;
+}
+
+.rank-tag {
+  background: #f5c518;
+  color: #2d0c01;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .chairman-details h1 {
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  margin: 8px 0;
+  font-size: 36px;
+  margin: 10px 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 .chairman-quote {
-  font-size: 18px;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.85);
-  max-width: 500px;
-  border-left: 3px solid var(--primary-gold);
-  padding-left: 20px;
-  margin: 20px 0;
+  font-style: italic;
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 20px;
 }
 
 .chairman-actions {
   display: flex;
   gap: 15px;
-  margin-top: 25px;
 }
 
 .pill-btn {
-  padding: 12px 28px;
-  border-radius: 100px;
+  padding: 10px 20px;
+  border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 15px;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 14px;
+  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
 }
-
-.pill-btn.wa { background: #25D366; color: white; border: none; }
-.pill-btn.mail { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.2); }
 
 .pill-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  background: white;
-  color: var(--rich-black);
+  background: #f5c518;
+  color: #2d0c01;
 }
 
-/* --- DONATION CARD: THE MPESA UI --- */
-.donation-section {
-  margin-bottom: 40px;
-}
-
-.paybill-card {
-  background: white;
-  border-radius: 24px;
-  padding: 40px;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: var(--shadow-lg);
-  text-align: center;
-}
-
-.mpesa-box {
-  background: #f8f9fa;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
-  border: 1px dashed #ced4da;
-  padding: 10px;
-}
-
-.mpesa-logo {
-  background: #4cb050;
-  color: white;
-  padding: 15px 30px;
-  border-radius: 15px;
-  font-weight: 800;
-  font-size: 20px;
-}
-
-.mpesa-details {
-  display: flex;
-  flex: 1;
-  justify-content: space-around;
-}
-
-.detail strong {
-  font-size: 22px;
-  color: var(--deep-maroon);
-  display: block;
-}
-
-/* --- INTERACTION GRID --- */
+/* INTERACTION GRID */
 .interaction-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
-  margin-bottom: 40px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
 }
 
 .i-box {
-  background: var(--glass-white);
-  backdrop-filter: blur(10px);
-  padding: 35px;
-  border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.4);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
-}
-
-.i-box:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-gold);
-}
-
-.action-link {
-  margin-top: 20px;
-  width: 100%;
-  padding: 14px;
-  border-radius: 12px;
-  border: 2px solid var(--soft-cream);
   background: white;
-  color: var(--deep-maroon);
-  font-weight: 700;
-  transition: var(--transition);
-}
-
-.action-link:hover {
-  background: var(--deep-maroon);
-  color: white;
-}
-
-/* --- INFO BAR --- */
-.info-bar {
-  background: var(--rich-black);
   padding: 30px;
   border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+}
+
+.i-header {
   display: flex;
-  justify-content: space-between;
-  color: white;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.dot-live { color: #ff0000; animation: blink 1s infinite; }
+.om-icon { filter: drop-shadow(0 0 5px #f5c518); }
+
+.action-link {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #fdf6e3;
+  color: #8B0000;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* INFO BAR */
+.info-bar {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
 }
 
 .info-item strong {
-  color: var(--primary-gold);
-  letter-spacing: 1px;
+  display: block;
+  font-size: 12px;
+  color: #8B0000;
+  text-transform: uppercase;
 }
 
-/* --- RESPONSIVENESS --- */
+/* MOBILE FIXES - THE UNBREAKABLE PART */
 @media (max-width: 768px) {
-  .chairman-card { flex-direction: column; text-align: center; }
-  .chairman-quote { border-left: none; border-top: 3px solid var(--primary-gold); padding: 20px 0 0 0; }
-  .mpesa-box { flex-direction: column; gap: 20px; padding: 20px; }
-  .info-bar { flex-direction: column; gap: 20px; text-align: center; }
+  .contact-main-content {
+    padding: 15px; /* Less padding so container has more room */
+  }
+
+  .chairman-hero {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  .chairman-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .gold-ring {
+    width: 120px;
+    height: 120px;
+  }
+
+  .chairman-details h1 {
+    font-size: 26px;
+  }
+
+  .chairman-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .pill-btn {
+    width: 100%; /* Buttons stack and fill width */
+    text-align: center;
+  }
+
+  .interaction-grid {
+    grid-template-columns: 1fr; /* Stack boxes */
+  }
+
+  .info-bar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .border-left {
+    border-left: none;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    width: 100%;
+  }
+}
+
+@keyframes blink { 
+  50% { opacity: 0; } 
 }
