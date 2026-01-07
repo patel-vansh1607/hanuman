@@ -8,7 +8,7 @@ import Maintenance from './components/Maintainance';
 import OfflinePage from './components/OfflinePage';
 import Loader from './components/Loader';
 
-const IS_MAINTENANCE = false; 
+const IS_MAINTENANCE = true; 
 
 const StatusBadge = ({ status }) => {
   if (status === 'live') {
