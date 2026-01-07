@@ -32,7 +32,32 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* SECTION 2: GRID */}
+        {/* SECTION 2: DONATION / PAYBILL (NEW) */}
+        <section className="donation-section">
+          <div className="paybill-card">
+            <div className="paybill-header">
+              <span className="heart-icon">❤️</span>
+              <h3>Sewa & Donations</h3>
+            </div>
+            <p>Support our community initiatives and temple maintenance.</p>
+            
+            <div className="mpesa-box">
+              <div className="mpesa-logo">M-PESA</div>
+              <div className="mpesa-details">
+                <div className="detail">
+                  <small>Business No.</small>
+                  <strong>247247</strong>
+                </div>
+                <div className="detail">
+                  <small>Account No.</small>
+                  <strong>0748 660 944</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 3: GRID */}
         <div className="interaction-grid">
           <div className="i-box">
             <div className="i-header">
@@ -53,15 +78,15 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* SECTION 3: LOCATION BAR */}
+        {/* SECTION 4: LOCATION BAR */}
         <div className="info-bar">
           <div className="info-item">
             <strong>Location</strong>
-            <span>NAKURU</span>
+            <span>NAKURU, KENYA</span>
           </div>
           <div className="info-item border-left">
-            <strong>Dates</strong>
-            <span>23rd January 2026 - 25th January 2026</span>
+            <strong>Event Dates</strong>
+            <span>23rd Jan - 25th Jan 2026</span>
           </div>
         </div>
       </main>
