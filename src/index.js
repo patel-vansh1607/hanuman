@@ -11,48 +11,36 @@ import { createBrowserRouter, RouterProvider, useNavigation } from 'react-router
 import Contact from './components/Contact';
 import Day2Morning from './components/Day2Morning';
 import Day2Evening from './components/Day2Evening';
-// This component detects the actual route transitions
-const RootLayout = () => {
-  const navigation = useNavigation();
-  
-  // navigation.state will be "loading" when a route is being fetched
-  const isActualLoading = navigation.state === "loading";
+import Maintenance from './components/Maintainance';
 
-  return (
-    <>
-      {isActualLoading && (
-        <div className="loader-overlay">
-          <div className="spinner"></div>
-          <h2 style={{ color: '#f5c518', marginTop: '20px' }}>Jai Shree Ram...</h2>
-        </div>
-      )}
-      {/* This renders your current page */}
-      <div className={isActualLoading ? "content-hidden" : "content-visible"}>
-         {/* If you are using a Layout/Outlet approach, put it here. 
-             Since you are using direct elements in the router, 
-             the Loader needs to be handled inside the Router scope. */}
-      </div>
-    </>
-  );
+
+const MaintenanceGuard = ({ children }) => {
+  const IS_MAINTENANCE = false;
+  if (IS_MAINTENANCE) {
+    return <Maintenance />;
+  }
+  return children;
 };
+
+// This component detects the actual route transitions
 
 // Define Router
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <MaintenanceGuard><App /></MaintenanceGuard>,
   },
     {
       path: "/live-day-1-hanuman-murti-inaugration",
-      element: <Day1 />,
+      element: <MaintenanceGuard><Day1 /></MaintenanceGuard>,
     },
   {
     path: "/live-day-2-hanuman-murti-inaugration",
-    element: <Day2 />,
+    element: <MaintenanceGuard><Day2 /></MaintenanceGuard>,
   },
   {
     path: "/live-day-3-hanuman-murti-inaugration",
-    element: <Day3 />,
+    element: <MaintenanceGuard><Day3 /></MaintenanceGuard>,
   },
   {
     path: "*",
@@ -60,15 +48,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/contact",
-    element: <Contact />,
+    element: <MaintenanceGuard><Contact /></MaintenanceGuard>,
   },
   {
     path: "/live-day-2-hanuman-murti-inaugration/morning-program",
-    element: <Day2Morning />,
+    element: <MaintenanceGuard><Day2Morning /></MaintenanceGuard>,
   },
   {
     path: "/live-day-2-hanuman-murti-inaugration/evening-program",
-    element: <Day2Evening />,
+    element: <MaintenanceGuard><Day2Evening /></MaintenanceGuard>,
   }
 ]);
 

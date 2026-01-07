@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import '../styles/Days.css';
 const Day2Evening = () => {
-  const [isLive, setIsLive] = useState(false); // ONE CHANGE
+  const [isLive, setIsLive] = useState(true); // ONE CHANGE
 
   useEffect(() => {
     document.title = 'Day 2 Evening | Hanuman Dada Murti Inauguration';
@@ -38,13 +38,14 @@ const Day2Evening = () => {
         
         <div className="video-wrapper">
           {isLive ? (
-                <iframe //PUT LINK HERE 
-                src="https://www.youtube.com/embed/Nh7oLI0438A?autoplay=1&mute=1&playsinline=1&rel=0"
-                title="Hanuman Murti Live"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
+              //   <iframe //PUT LINK HERE 
+              //   src="https://youtube.com/live/PeNWVeOc0d4"
+              //   title="Hanuman Murti Live"
+              //   frameborder="0"
+              //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              //   allowfullscreen>
+              // </iframe>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/PeNWVeOc0d4?si=Kt3ZI0eW8SU2XaYv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           ) : (
             <div className="not-ready-box">
                <div className="temple-icon">🕉️</div>

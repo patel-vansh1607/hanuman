@@ -6,7 +6,6 @@ import Navbar from '../components/Navbar';
 import NewsTicker from '../components/NewsTicker';
 import Maintenance from '../components/Maintainance';
 
-const IS_MAINTENANCE = false; 
 
 // --- The StatusBadge Component ---
 const StatusBadge = ({ status }) => {
@@ -24,9 +23,6 @@ const StatusBadge = ({ status }) => {
 };
 
 const Day2 = () => {
-  if (IS_MAINTENANCE) {
-    return <Maintenance />;
-  }
 
   return (
     <div className="App">
