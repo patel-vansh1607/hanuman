@@ -113,13 +113,13 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
               </form>
               
               <p className="support-text" style={styles.supportText}>
-                Any questions? Send <a href="mailto:support@hanuamandada.live" style={styles.emailLink}>support@hanuamandada.live</a>
+                Any questions? Send<a href="mailto:support@hanuamandada.live" style={styles.emailLink}>support@hanuamandada.live</a>
               </p>
             </div>
 
             <div className="footer-section" style={styles.footer}>
               <p className="jai-text" style={styles.jai}>Jai Shri Ram | Jai Hanuman</p>
-              <p style={styles.date}>Whole event broadcast available soon</p>
+              <p style={styles.date}>Broadcast link for all days can be found on this website.</p>
             </div>
           </div>
         </motion.div>
