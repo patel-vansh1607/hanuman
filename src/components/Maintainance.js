@@ -100,7 +100,7 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
 
           <div className="text-content">
             <p style={styles.soonText}>STAY TUNED</p>
-            <h1 style={styles.title}>Hanuman Murti <br /> <span style={styles.light}>Inauguration</span></h1>
+            <h1 style={styles.title}>Hanuman Dada Murti <br /> <span style={styles.light}>Inauguration</span></h1>
             
             <div style={styles.formContainer}>
               <p className="instruction-text" style={styles.instruction}>
