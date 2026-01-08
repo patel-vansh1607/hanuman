@@ -6,24 +6,38 @@ import '../styles/Days.css';
 
 const Day1 = () => {
   const [isLive, setIsLive] = useState(false);
-  const VIDEO_ID = "sPuylb6aR4Y"; // JUST CHANGE THIS ID FOR DAY 2/3
+  const [checking, setChecking] = useState(true);
+  const VIDEO_ID = "sPuylb6aR4Y"; 
 
   useEffect(() => {
     document.title = 'Day 1 | Hanuman Dada Murti Inauguration';
+
     const checkYouTube = async () => {
+      // Try Proxy 1: AllOrigins
       try {
-        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${VIDEO_ID}`)}`);
-        const data = await response.json();
-        // This checks if the "LIVE" badge text exists in the YouTube page HTML
-        const isCurrentlyLive = data.contents.includes('{"style":"LIVE","label":"LIVE"}') || data.contents.includes('"isLive":true');
-        setIsLive(isCurrentlyLive);
-      } catch (error) {
-        console.error("Checking status...");
-      }
+        const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${VIDEO_ID}`)}&t=${Date.now()}`);
+        const data = await res.json();
+        if (data.contents.includes('LIVE') || data.contents.includes('isLiveNow')) {
+          setIsLive(true);
+          setChecking(false);
+          return;
+        }
+      } catch (e) { console.log("Proxy 1 failed"); }
+
+      // Try Proxy 2: FactCheck (Alternative)
+      try {
+        const res = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`https://www.youtube.com/watch?v=${VIDEO_ID}`)}`);
+        const text = await res.text();
+        if (text.includes('LIVE') || text.includes('isLiveNow')) {
+          setIsLive(true);
+        }
+      } catch (e) { console.log("Proxy 2 failed"); }
+      
+      setChecking(false);
     };
 
     checkYouTube();
-    const interval = setInterval(checkYouTube, 15000); 
+    const interval = setInterval(checkYouTube, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -33,20 +47,18 @@ const Day1 = () => {
       <div className="content-container">
         <h1 className='p1'>Day 1 | Hanuman Dada Murti Inauguration</h1>
         <div className="video-wrapper">
-          {isLive ? (
+          {/* If the automatic check is failing, we show the player ANYWAY if it's the day of the event */}
+          {isLive || !checking ? (
             <iframe 
-              src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=0&playsinline=1&rel=0`}
-              title="Live Stream"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=0`} 
+              title="Live" 
+              frameBorder="0" 
               allowFullScreen>
             </iframe>
           ) : (
             <div className="not-ready-box">
                <div className="temple-icon">🕉️</div>
-               <h2>Live Stream Not Available</h2>
-               <p>The spiritual proceedings are being prepared. Please stay tuned.</p>
-               <div className="status-indicator"><span className="dot"></span> Waiting for Live...</div>
+               <h2>Checking Stream...</h2>
             </div>
           )}
         </div>
@@ -55,4 +67,4 @@ const Day1 = () => {
     </div>
   );
 };
-export default Day1;  
+export default Day1;
