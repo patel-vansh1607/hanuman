@@ -6,14 +6,9 @@ import Navbar from './components/Navbar';
 import NewsTicker from './components/NewsTicker';
 import OfflinePage from './components/OfflinePage';
 import Loader from './components/Loader';
+import { supabase } from './supabaseClient'; // Ensure this file is inside /src
 
-// --- UPDATE YOUR YOUTUBE IDs HERE ---
-const IDS = {
-  day1: "sPuylb6aR4Y", // Your current test ID
-  day2: "REPLACE_WITH_DAY_2_ID",
-  day3: "REPLACE_WITH_DAY_3_ID"
-};
-
+// --- COMPONENT: StatusBadge (Purely for Display) ---
 const StatusBadge = ({ status }) => {
   if (status === 'live') {
     return (
@@ -32,7 +27,7 @@ function App() {
   const [isOnline, setIsOnline] = useState(window.navigator.onLine);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Automation State
+  // Status state controlled by Supabase
   const [statuses, setStatuses] = useState({
     day1: 'upcoming',
     day2: 'upcoming',
@@ -40,43 +35,35 @@ function App() {
   });
 
   useEffect(() => {
-    const checkAllStatuses = async () => {
-      const updatedStatuses = { ...statuses };
-
-      for (const [day, id] of Object.entries(IDS)) {
-        if (!id || id.includes("REPLACE")) continue;
-
-        try {
-          // Using AllOrigins with a timestamp to force fresh data (Avoids Caching)
-          const response = await fetch(
-            `https://api.allorigins.win/get?url=${encodeURIComponent(
-              `https://www.youtube.com/watch?v=${id}`
-            )}&timestamp=${Date.now()}`
-          );
-          const data = await response.json();
-          const html = data.contents;
-
-          // Detect if currently Live
-          const isLive = 
-            html.includes('{"style":"LIVE","label":"LIVE"}') || 
-            html.includes('"isLive":true') || 
-            html.includes('isLiveNow":true');
-
-          updatedStatuses[day] = isLive ? 'live' : 'upcoming';
-        } catch (error) {
-          console.error(`Error checking ${day}:`, error);
-        }
+    // 1. Function to fetch statuses from Supabase
+    const fetchAllStatuses = async () => {
+      const { data, error } = await supabase
+        .from('programmes')
+        .select('id, status');
+      
+      if (data) {
+        const statusMap = {};
+        data.forEach(item => {
+          statusMap[item.id] = item.status;
+        });
+        setStatuses(prev => ({ ...prev, ...statusMap }));
       }
-      setStatuses(updatedStatuses);
+      if (error) console.error("Error fetching statuses:", error);
     };
 
-    // Run check immediately
-    checkAllStatuses();
+    // 2. Initial Fetch
+    fetchAllStatuses();
 
-    // Re-check every 30 seconds
-    const interval = setInterval(checkAllStatuses, 30000);
+    // 3. Realtime Listener: Updates home page badges instantly when Admin clicks a button
+    const channel = supabase
+      .channel('public-status-updates')
+      .on('postgres_changes', 
+        { event: 'UPDATE', schema: 'public', table: 'programmes' }, 
+        () => fetchAllStatuses() 
+      )
+      .subscribe();
 
-    // Existing Load logic
+    // 4. Page Load & Online/Offline Logic
     const handleWindowLoad = () => setIsLoading(false);
     if (document.readyState === 'complete') {
       setIsLoading(false);
@@ -92,10 +79,17 @@ function App() {
       window.removeEventListener('load', handleWindowLoad);
       window.removeEventListener('online', handleStatus);
       window.removeEventListener('offline', handleStatus);
-      clearInterval(interval);
+      supabase.removeChannel(channel);
     };
   }, []);
+const getDay2OverallStatus = () => {
+  const m = statuses.day2morning;
+  const e = statuses.day2evening;
 
+  if (m === 'live' || e === 'live') return 'live';
+  if (m === 'completed' && e === 'completed') return 'completed';
+  return 'upcoming';
+};
   if (isLoading) return <Loader />;
   if (!isOnline) return <OfflinePage />;
 
@@ -116,6 +110,7 @@ function App() {
       <p className='ttt'>Please Select the day you want to view</p> 
 
       <div className="all">
+        {/* Day 1 */}
         <a href="/live-day-1-hanuman-murti-inaugration" className="btn-text">
           <div className="btn-content">
             <span>Day 1 | Friday, 23 January 2026</span>
@@ -123,13 +118,16 @@ function App() {
           </div>
         </a>
 
+        {/* Day 2 */}
         <a href="/live-day-2-hanuman-murti-inaugration" className="btn-text">
           <div className="btn-content">
             <span>Day 2 | Saturday, 24 January 2026</span>
-            <StatusBadge status={statuses.day2} />
+            {/* This now uses the smart logic */}
+            <StatusBadge status={getDay2OverallStatus()} /> 
           </div>
         </a>
 
+        {/* Day 3 */}
         <a href="/live-day-3-hanuman-murti-inaugration" className="btn-text">
           <div className="btn-content">
             <span>Day 3 | Sunday, 25 January 2026</span>

@@ -1,70 +1,110 @@
-import React from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import Day1 from './components/Day1';
-import Day2 from './components/Day2';
-import Day3 from './components/Day3';
-import NotFound from './components/NotFound';
-import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider, useNavigation } from 'react-router-dom';
-import Contact from './components/Contact';
-import Day2Morning from './components/Day2Morning';
-import Day2Evening from './components/Day2Evening';
-import Maintenance from './components/Maintainance';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { supabase } from './supabaseClient';
 
+// 1. CRITICAL: Lazy load your components so the initial load is tiny
+const App = lazy(() => import('./App'));
+const Day1 = lazy(() => import('./components/Day1'));
+const Day2 = lazy(() => import('./components/Day2'));
+const Day3 = lazy(() => import('./components/Day3'));
+const Contact = lazy(() => import('./components/Contact'));
+const Day2Morning = lazy(() => import('./components/Day2Morning'));
+const Day2Evening = lazy(() => import('./components/Day2Evening'));
+const AdminPanel = lazy(() => import('./components/Adminpanel'));
+const Maintenance = lazy(() => import('./components/Maintainance'));
+const NotFound = lazy(() => import('./components/NotFound'));
+
+// Simple Loading Spinner for the lazy components
+const PageLoader = () => (
+  <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fdf6e3' }}>
+    <p style={{ fontFamily: 'serif', color: '#8b0000' }}>Loading...</p>
+  </div>
+);
 
 const MaintenanceGuard = ({ children }) => {
-  const IS_MAINTENANCE = false;
-  if (IS_MAINTENANCE) {
-    return <Maintenance />;
+  const [dbStatus, setDbStatus] = useState(null);
+  const [displayMode, setDisplayMode] = useState(null); 
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    const fetchInitial = async () => {
+      // Use .limit(1) instead of .single() to avoid the 406 error
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('maintenance_mode')
+        .eq('id', 'global_config')
+        .limit(1);
+
+      if (!error && data && data.length > 0) {
+        const isMaint = data[0].maintenance_mode;
+        setDbStatus(isMaint);
+        setDisplayMode(isMaint ? 'maintenance' : 'live');
+      } else {
+        // Fallback if DB fails so site doesn't stay white forever
+        setDisplayMode('live');
+      }
+    };
+    fetchInitial();
+
+    const channel = supabase.channel('global-gatekeeper')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'site_settings' }, 
+      (payload) => {
+        setDbStatus(payload.new.maintenance_mode);
+        setIsTransitioning(true); 
+      })
+      .subscribe();
+
+    return () => supabase.removeChannel(channel);
+  }, []);
+
+  // Show nothing until we know the status (prevents flicker)
+  if (displayMode === null) return null;
+
+  if (isTransitioning) {
+    return (
+      <Suspense fallback={<PageLoader />}>
+        <Maintenance 
+          isStinger={true} 
+          isResuming={!dbStatus} 
+          onComplete={() => {
+            setDisplayMode(dbStatus ? 'maintenance' : 'live');
+            setIsTransitioning(false);
+          }} 
+        />
+      </Suspense>
+    );
   }
-  return children;
+
+  if (displayMode === 'maintenance') {
+    return (
+      <Suspense fallback={<PageLoader />}>
+        <Maintenance isStinger={false} />
+      </Suspense>
+    );
+  }
+
+  return (
+    <Suspense fallback={<PageLoader />}>
+      {children}
+    </Suspense>
+  );
 };
 
-// This component detects the actual route transitions
-
-// Define Router
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MaintenanceGuard><App /></MaintenanceGuard>,
-  },
-    {
-      path: "/live-day-1-hanuman-murti-inaugration",
-      element: <MaintenanceGuard><Day1 /></MaintenanceGuard>,
-    },
-  {
-    path: "/live-day-2-hanuman-murti-inaugration",
-    element: <MaintenanceGuard><Day2 /></MaintenanceGuard>,
-  },
-  {
-    path: "/live-day-3-hanuman-murti-inaugration",
-    element: <MaintenanceGuard><Day3 /></MaintenanceGuard>,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
-  {
-    path: "/contact",
-    element: <MaintenanceGuard><Contact /></MaintenanceGuard>,
-  },
-  {
-    path: "/live-day-2-hanuman-murti-inaugration/morning-program",
-    element: <MaintenanceGuard><Day2Morning /></MaintenanceGuard>,
-  },
-  {
-    path: "/live-day-2-hanuman-murti-inaugration/evening-program",
-    element: <MaintenanceGuard><Day2Evening /></MaintenanceGuard>,
-  }
+  { path: "/", element: <MaintenanceGuard><App /></MaintenanceGuard> },
+  { path: "/live-day-1-hanuman-murti-inaugration", element: <MaintenanceGuard><Day1 /></MaintenanceGuard> },
+  { path: "/live-day-2-hanuman-murti-inaugration", element: <MaintenanceGuard><Day2 /></MaintenanceGuard> },
+  { path: "/live-day-3-hanuman-murti-inaugration", element: <MaintenanceGuard><Day3 /></MaintenanceGuard> },
+  { path: "/contact", element: <MaintenanceGuard><Contact /></MaintenanceGuard> },
+  { path: "/live-day-2-hanuman-murti-inaugration/morning-program", element: <MaintenanceGuard><Day2Morning /></MaintenanceGuard> },
+  { path: "/live-day-2-hanuman-murti-inaugration/evening-program", element: <MaintenanceGuard><Day2Evening /></MaintenanceGuard> },
+  { path: "/admin", element: <AdminPanel /> }, // Admin doesn't need the guard
+  { path: "*", element: <NotFound /> },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
 );
-
-reportWebVitals();
