@@ -49,9 +49,20 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
           .pulse-dot-red { width: 10px; height: 10px; background: #ef4444; border-radius: 50%; animation: pulse-red 2s infinite; }
           .pulse-dot-green { width: 10px; height: 10px; background: #10b981; border-radius: 50%; animation: pulse-green 2s infinite; }
           
-          .main-container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; text-align: center; }
-          .img-wrapper { width: min(300px, 60vw); margin-bottom: 25px; }
+          /* BASE CONTAINER */
+          .main-container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; text-align: center; overflow: hidden; }
           
+          /* MOBILE ONLY CHANGES */
+          @media (max-width: 767px) {
+            .img-wrapper { width: 150px !important; margin-bottom: 10px !important; }
+            .text-content h1 { font-size: 1.8rem !important; margin-bottom: 8px !important; }
+            .instruction-text { font-size: 12px !important; margin-bottom: 10px !important; }
+            .footer-section { marginTop: 15px !important; padding-top: 10px !important; }
+            .jai-text { font-size: 1.1rem !important; }
+            .support-text { font-size: 11px !important; margin-top: 8px !important; }
+          }
+
+          /* LAPTOP VERSION REMAINS EXACTLY AS YOU HAD IT */
           @media (min-width: 768px) { 
             .main-container { flex-direction: row; gap: 80px; text-align: left; } 
             .img-wrapper { width: 340px; } 
@@ -59,7 +70,6 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
         `}
       </style>
 
-      {/* Responsive Status Banner */}
       <AnimatePresence>
         {isTransitioning && (
           <motion.div 
@@ -84,7 +94,7 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
 
       {!isTransitioning && (
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}} className="main-container">
-          <div className="img-wrapper">
+          <div className="img-wrapper" style={styles.imgWrapperBase}>
             <img src="https://res.cloudinary.com/dxgkcyfrl/image/upload/v1767887119/hmi22_kstgzm.png" style={styles.hanumanImg} alt="Hanuman" />
           </div>
 
@@ -93,7 +103,7 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
             <h1 style={styles.title}>Hanuman Murti <br /> <span style={styles.light}>Inauguration</span></h1>
             
             <div style={styles.formContainer}>
-              <p style={styles.instruction}>
+              <p className="instruction-text" style={styles.instruction}>
                 Our digital doors are temporarily closed as we prepare. <br/>
                 Drop your email to receive an invitation when we open:
               </p>
@@ -102,14 +112,13 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
                 <button type="submit" style={styles.btn}>NOTIFY ME</button>
               </form>
               
-              {/* SUPPORT EMAIL SECTION */}
-              <p style={styles.supportText}>
+              <p className="support-text" style={styles.supportText}>
                 Any questions? Send <a href="mailto:support@hanuamandada.live" style={styles.emailLink}>support@hanuamandada.live</a>
               </p>
             </div>
 
-            <div style={styles.footer}>
-              <p style={styles.jai}>Jai Shri Ram | Jai Hanuman</p>
+            <div className="footer-section" style={styles.footer}>
+              <p className="jai-text" style={styles.jai}>Jai Shri Ram | Jai Hanuman</p>
               <p style={styles.date}>Whole event broadcast available soon</p>
             </div>
           </div>
@@ -129,6 +138,7 @@ const styles = {
   },
   bannerText: { color: '#fff', fontSize: 'clamp(12px, 2.5vw, 16px)', fontWeight: 'bold' },
   counterText: { fontSize: 'clamp(14px, 3vw, 20px)', marginLeft: '5px', color: '#fff' },
+  imgWrapperBase: { marginBottom: '25px' },
   hanumanImg: { width: '100%', height: 'auto' },
   soonText: { fontSize: '13px', letterSpacing: '5px', color: '#8b4513', marginBottom: '10px', fontWeight: '700' },
   title: { fontSize: 'clamp(2.4rem, 5.5vw, 4.2rem)', color: '#4a2c1a', margin: '0 0 18px 0', lineHeight: '0.9' },
