@@ -1,39 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { supabase } from './supabaseClient'; // Ensure path is correct
-
 const MaintenanceGuard = ({ children }) => {
-  const [isMaintenance, setIsMaintenance] = useState(null);
+  const [dbStatus, setDbStatus] = useState(null);
+  const [displayMode, setDisplayMode] = useState(null); 
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // 1. Check initial status
-    const fetchStatus = async () => {
-      const { data } = await supabase.from('site_settings').select('maintenance_mode').single();
-      if (data) setIsMaintenance(data.maintenance_mode);
+    // 1. Initial Load
+    const init = async () => {
+      const { data } = await supabase.from('site_settings').select('maintenance_mode').eq('id', 'global_config').single();
+      if (data) {
+        setDbStatus(data.maintenance_mode);
+        setDisplayMode(data.maintenance_mode ? 'maintenance' : 'live');
+      }
     };
-    fetchStatus();
+    init();
 
-    // 2. Real-time listener for the Kill Switch
-    const channel = supabase.channel('global-gatekeeper')
-      .on('postgres_changes', { 
-        event: 'UPDATE', 
-        schema: 'public', 
-        table: 'site_settings' 
-      }, (payload) => {
-        setIsMaintenance(payload.new.maintenance_mode);
+    // 2. Real-time Switch
+    const channel = supabase.channel('gatekeeper')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'site_settings' }, (payload) => {
+        setDbStatus(payload.new.maintenance_mode);
+        setIsTransitioning(true); // This starts the countdown WITHOUT removing the site
       })
       .subscribe();
 
     return () => supabase.removeChannel(channel);
   }, []);
 
-  // While checking DB, show nothing or a small spinner
-  if (isMaintenance === null) return null; 
+  if (displayMode === null) return null;
 
-  // If maintenance is ON, block all children and show Maintenance page
-  if (isMaintenance) {
-    return <Maintenance />;
-  }
+  const handleCountdownDone = () => {
+    // ONLY change the display mode after the 5 seconds are up
+    setDisplayMode(dbStatus ? 'maintenance' : 'live');
+    setIsTransitioning(false);
+  };
 
-  // If maintenance is OFF, show the requested page
-  return children;
+  return (
+    <>
+      {/* CRITICAL CHANGE: 
+         We keep rendering {children} (your site) even if dbStatus is true, 
+         as long as we are still in the "isTransitioning" (countdown) phase.
+      */}
+      {(displayMode === 'live' || (isTransitioning && dbStatus)) && (
+        <div style={{ 
+          opacity: (isTransitioning && dbStatus) ? 0.7 : 1, 
+          transition: 'opacity 2s ease' 
+        }}>
+          {children}
+        </div>
+      )}
+
+      {/* The Overlay (Banner + Full Page) */}
+      {(displayMode === 'maintenance' || isTransitioning) && (
+        <Maintenance 
+          isStinger={isTransitioning && dbStatus} 
+          isResuming={isTransitioning && !dbStatus} 
+          onComplete={handleCountdownDone} 
+        />
+      )}
+    </>
+  );
 };

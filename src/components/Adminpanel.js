@@ -68,22 +68,28 @@ const AdminPanel = () => {
     setLoginLoading(false);
   };
 
-  const executeAction = async (e) => {
-    e.preventDefault();
-    setVerifying(true);
-    const { data, error } = await supabase.from('system_secrets').select('key_value').eq('key_name', 'admin_action_key').single();
-    if (!error && actionKey === data.key_value) {
-      if (pendingAction.type === 'stream') {
-        await supabase.from('programmes').update({ status: pendingAction.newStatus, is_live: pendingAction.newStatus === 'live' }).eq('id', pendingAction.id);
-      } else if (pendingAction.type === 'system') {
-        await supabase.from('site_settings').update({ maintenance_mode: pendingAction.newStatus }).eq('id', 'global_config');
-        setIsSwitchArmed(false);
-      }
-      await loadDashboardData();
-      setShowSecurity(false); setActionKey(''); setPendingAction(null);
-    } else { alert("Invalid Security Key"); }
-    setVerifying(false);
-  };
+const executeAction = async (e) => {
+  e.preventDefault();
+  setVerifying(true);
+  const { data, error } = await supabase.from('system_secrets').select('key_value').eq('key_name', 'admin_action_key').single();
+  
+  if (!error && actionKey === data.key_value) {
+    if (pendingAction.type === 'stream') {
+      await supabase.from('programmes').update({ status: pendingAction.newStatus, is_live: pendingAction.newStatus === 'live' }).eq('id', pendingAction.id);
+    } else if (pendingAction.type === 'system') {
+      await supabase.from('site_settings').update({ maintenance_mode: pendingAction.newStatus }).eq('id', 'global_config');
+      setIsSwitchArmed(false);
+      
+      // Added Alert for confirmation
+      alert(`SYSTEM ${pendingAction.newStatus ? 'LOCKED (Maintenance Active)' : 'RESTORED (Online)'}`);
+    }
+    await loadDashboardData();
+    setShowSecurity(false); setActionKey(''); setPendingAction(null);
+  } else { 
+    alert("Invalid Security Key"); 
+  }
+  setVerifying(false);
+};
 
   if (pageLoading) return (
     <div style={styles.loadingContainer}>
