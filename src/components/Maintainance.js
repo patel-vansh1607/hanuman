@@ -39,10 +39,7 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
     <div style={isStinger ? styles.stingerBg : styles.staticBg}>
       <style>
         {`
-          @font-face {
-            font-family: 'Vantely';
-            src: url('/fonts/Vantely.woff2') format('woff2');
-          }
+
           .main-container {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; text-align: center;
