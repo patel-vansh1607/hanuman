@@ -104,8 +104,8 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
           
           <div style={styles.formContainer}>
             <p style={styles.instruction}>
-              Our digital doors are temporarily closed as we prepare. <br/>
-              Drop your email to receive an invitation when we open:
+              Our digital doors are temporarily closed as we prepare for the stream. <br/>
+              Drop your email to receive a Notification when the website opens:
             </p>
             
             <form onSubmit={handleSubscribe} style={styles.form}>
