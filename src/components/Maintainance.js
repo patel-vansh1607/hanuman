@@ -119,7 +119,7 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
 
             <div className="footer-section" style={styles.footer}>
               <p className="jai-text" style={styles.jai}>Jai Shri Ram | Jai Hanuman</p>
-              <p style={styles.date}>Broadcast link for all days can be found on this website.</p>
+              <p style={styles.date}>Broadcast link for all days will be available once website is open.</p>
             </div>
           </div>
         </motion.div>
