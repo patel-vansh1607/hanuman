@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Maintenance = ({ isStinger, isResuming, onComplete }) => {
   const [count, setCount] = useState(5);
   const [email, setEmail] = useState('');
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   const isTransitioning = isStinger || isResuming;
 
@@ -21,10 +22,27 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
     }
   }, [count, isTransitioning, onComplete]);
 
+  useEffect(() => {
+    if (toast.show) {
+      const timer = setTimeout(() => setToast({ ...toast, show: false }), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast.show]);
+
   const handleSubscribe = async (e) => {
     e.preventDefault();
-    await supabase.from('subscribers').insert([{ email }]);
-    setEmail('');
+    const { error } = await supabase.from('subscribers').insert([{ email }]);
+
+    if (error) {
+      if (error.code === '23505') {
+        setToast({ show: true, message: "🙏 You're already on the list!", type: 'info' });
+      } else {
+        setToast({ show: true, message: "❌ Something went wrong.", type: 'error' });
+      }
+    } else {
+      setToast({ show: true, message: "✨ Success! We'll notify you soon.", type: 'success' });
+      setEmail('');
+    }
   };
 
   return (
@@ -36,6 +54,11 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
     }}>
       <style>
         {`
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+          
+          /* Only the input and toast get Poppins */
+          .poppins-text { font-family: 'Poppins', sans-serif !important; }
+
           @keyframes pulse-green {
             0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
             70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
@@ -49,20 +72,17 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
           .pulse-dot-red { width: 10px; height: 10px; background: #ef4444; border-radius: 50%; animation: pulse-red 2s infinite; }
           .pulse-dot-green { width: 10px; height: 10px; background: #10b981; border-radius: 50%; animation: pulse-green 2s infinite; }
           
-          /* BASE CONTAINER */
           .main-container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; text-align: center; overflow: hidden; }
           
-          /* MOBILE ONLY CHANGES */
           @media (max-width: 767px) {
             .img-wrapper { width: 150px !important; margin-bottom: 10px !important; }
             .text-content h1 { font-size: 1.8rem !important; margin-bottom: 8px !important; }
             .instruction-text { font-size: 12px !important; margin-bottom: 10px !important; }
-            .footer-section { marginTop: 15px !important; padding-top: 10px !important; }
+            .footer-section { margin-top: 15px !important; padding-top: 10px !important; }
             .jai-text { font-size: 1.1rem !important; }
             .support-text { font-size: 11px !important; margin-top: 8px !important; }
           }
 
-          /* LAPTOP VERSION REMAINS EXACTLY AS YOU HAD IT */
           @media (min-width: 768px) { 
             .main-container { flex-direction: row; gap: 80px; text-align: left; } 
             .img-wrapper { width: 340px; } 
@@ -70,6 +90,7 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
         `}
       </style>
 
+      {/* TOP COUNTDOWN BANNER */}
       <AnimatePresence>
         {isTransitioning && (
           <motion.div 
@@ -92,6 +113,7 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
         )}
       </AnimatePresence>
 
+      {/* MAIN CONTENT AREA */}
       {!isTransitioning && (
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}} className="main-container">
           <div className="img-wrapper" style={styles.imgWrapperBase}>
@@ -108,12 +130,20 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
                 Drop your email to receive an invitation when we open:
               </p>
               <form onSubmit={handleSubscribe} style={styles.form}>
-                <input type="email" placeholder="your@email.com" style={styles.input} value={email} onChange={(e) => setEmail(e.target.value)} required />
-                <button type="submit" style={styles.btn}>NOTIFY ME</button>
+                <input 
+                  type="email" 
+                  placeholder="your@email.com" 
+                  className="poppins-text" // Applying Poppins here
+                  style={styles.input} 
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  required 
+                />
+                <button type="submit" className="poppins-text" style={styles.btn}>NOTIFY ME</button>
               </form>
               
               <p className="support-text" style={styles.supportText}>
-                Any questions? Send<a href="mailto:support@hanuamandada.live" style={styles.emailLink}>support@hanuamandada.live</a>
+                Any questions? Send <a href="mailto:support@hanuamandada.live" style={styles.emailLink}>support@hanuamandada.live</a>
               </p>
             </div>
 
@@ -124,6 +154,26 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
           </div>
         </motion.div>
       )}
+
+      {/* MODERN UPGRADED TOAST */}
+      <AnimatePresence>
+        {toast.show && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, scale: 1, x: '-50%' }}
+            exit={{ opacity: 0, y: 20, scale: 0.9, x: '-50%' }}
+            className="poppins-text" // Applying Poppins here
+            style={{
+              ...styles.toast,
+              borderLeft: `6px solid ${
+                toast.type === 'error' ? '#ef4444' : toast.type === 'info' ? '#d4a373' : '#10b981'
+              }`
+            }}
+          >
+            {toast.message}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -152,7 +202,28 @@ const styles = {
   emailLink: { color: '#4a2c1a', fontWeight: 'bold', textDecoration: 'none', marginLeft: '4px' },
   footer: { marginTop: '45px', borderTop: '1px solid rgba(139, 19, 19, 0.15)', paddingTop: '20px' },
   jai: { fontSize: '1.5rem', color: '#4a2c1a', margin: 0, fontWeight: '900' },
-  date: { fontSize: '13px', color: '#8b4513', fontWeight: 'bold' }
+  date: { fontSize: '13px', color: '#8b4513', fontWeight: 'bold' },
+  toast: {
+    position: 'fixed',
+    bottom: '40px',
+    left: '50%',
+    background: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(10px)',
+    color: '#4a2c1a',
+    padding: '16px 28px',
+    borderRadius: '16px',
+    fontWeight: '600',
+    zIndex: 20000,
+    boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+    fontSize: '15px',
+    textAlign: 'center',
+    minWidth: '320px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    letterSpacing: '0.5px',
+    border: '1px solid rgba(255,255,255,0.3)'
+  }
 };
 
 export default Maintenance;
