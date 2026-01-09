@@ -7,6 +7,7 @@
 
 html, body, #root {
   height: 100%;
+  padding: 0 !;
   background-color: #e2ce8f; /* Your theme gold/tan background */
   font-family: 'Poppins', sans-serif;
 }
@@ -178,4 +179,189 @@ html, body, #root {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+/* Floating Action Button */
+.fab-wrapper {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999;
+}
+
+.fab-btn {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #2d0c01;
+  color: #F5D07E;
+  border: 2px solid #F5D07E;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fab-btn:hover {
+  transform: scale(1.1);
+}
+
+.notification-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 15px;
+  height: 15px;
+  background: #ef4444;
+  border-radius: 50%;
+  border: 2px solid #2d0c01;
+}
+
+/* Announcement Overlay */
+.announcement-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(45, 12, 1, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.announcement-card {
+  background: #fff;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 2px solid #F5D07E;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.ann-header {
+  background: #2d0c01;
+  color: #F5D07E;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ann-header h3 { margin: 0; font-size: 20px; font-weight: 700; }
+
+.close-ann {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #fff;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.ann-body {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.ann-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 12px;
+  border-left: 4px solid #F5D07E;
+}
+
+.ann-item p {
+  margin: 0 0 5px 0;
+  color: #2d0c01;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.ann-item small {
+  font-size: 11px;
+  opacity: 0.5;
+  font-weight: 700;
+}
+
+.no-ann {
+  text-align: center;
+  opacity: 0.5;
+  padding: 40px 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .fab-wrapper { bottom: 20px; right: 20px; }
+  .fab-btn { width: 55px; height: 55px; font-size: 20px; }
+  .announcement-card { border-radius: 25px; }
+}
+
+/* Pulse animation for the button when new data arrives */
+.pulse-border {
+  animation: fab-pulse 2s infinite;
+}
+
+@keyframes fab-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 208, 126, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(245, 208, 126, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 208, 126, 0); }
+}
+/* Announcement Item Details */
+.ann-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #2d0c01;
+  opacity: 0.6;
+}
+
+.ann-item {
+  background: #fdfaf5;
+  padding: 18px;
+  border-radius: 18px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(245, 208, 126, 0.3);
+  border-left: 5px solid #2d0c01;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+/* FAB Enhancements */
+.fab-btn {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #2d0c01;
+  color: #F5D07E;
+  border: 2px solid #F5D07E;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(45, 12, 1, 0.4);
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fab-btn:active {
+  transform: scale(0.9);
+}
+
+@keyframes fab-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 208, 126, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(245, 208, 126, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 208, 126, 0); }
+}
+/* Add a soft shrink effect on every button/link when clicked */
+button:active, a:active, .btn-text:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
 }

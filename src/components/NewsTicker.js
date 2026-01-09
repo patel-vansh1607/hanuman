@@ -1,36 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabaseClient';
-import './Ticker.css';
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandsPraying, faCircle } from '@fortawesome/free-solid-svg-icons';
+import './StaticTicker.css';
 
-const NewsTicker = () => {
-  const [newsItems, setNewsItems] = useState([]);
-
-  useEffect(() => {
-    const fetchTicker = async () => {
-      const { data } = await supabase.from('ticker_messages').select('content');
-      if (data) setNewsItems(data.map(item => item.content));
-    };
-    fetchTicker();
-  }, []);
-
-  if (newsItems.length === 0) return null;
-
+const StaticTicker = () => {
   return (
-    <div className="ticker-container">
-      <div className="ticker-scroll">
-        <div className="ticker-item-list">
-          {newsItems.map((item, index) => (
-            <span key={index} className="ticker-text">{item}</span>
-          ))}
+    <div className="premium-ticker-row">
+      <div className="ticker-wrapper">
+        
+        <div className="ticker-section centered-yajman">
+          {/* Decorative Badge */}
+          <div className="mini-badge">MAIN YAJMAN</div>
+          
+          {/* The Content from your image */}
+          <span className="yajman-text">
+            Late Sushilaben Ratilal Shah & Parivar 
+            <span className="org-pill"> (Ruby Hardware Ltd.)</span>
+            
+            <FontAwesomeIcon icon={faCircle} className="dot-sep" />
+            
+            <span className="secondary-name">Shailesh Sheth & Ilesh Patel Parivar</span>
+          </span>
+          
+          <div className="mini-badge">MAIN YAJMAN</div>
         </div>
-        <div className="ticker-item-list" aria-hidden="true">
-          {newsItems.map((item, index) => (
-            <span key={`dup-${index}`} className="ticker-text">{item}</span>
-          ))}
-        </div>
+
       </div>
     </div>
   );
 };
 
-export default NewsTicker;
+export default StaticTicker;

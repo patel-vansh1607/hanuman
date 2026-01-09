@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   faLayerGroup, faShieldHalved, faArrowRightFromBracket, 
   faLock, faCircleNotch, faUsers, faCheckCircle, 
-  faBars, faChevronLeft, faKey, faXmark, faBullhorn, faTrash
+  faBars, faChevronLeft, faKey, faXmark, faBullhorn, faTrash, faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -16,7 +16,7 @@ const AdminPanel = () => {
   const [pageLoading, setPageLoading] = useState(true); 
   const [items, setItems] = useState([]);
   const [subscribers, setSubscribers] = useState([]); 
-  const [tickerItems, setTickerItems] = useState([]); // NEW: Ticker state
+  const [announcements, setAnnouncements] = useState([]); // REPLACED: Ticker state
   const [maintMode, setMaintMode] = useState(false);
   const [activeTab, setActiveTab] = useState('streams'); 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -40,7 +40,7 @@ const AdminPanel = () => {
   const [pendingAction, setPendingAction] = useState(null); 
   const [actionKey, setActionKey] = useState('');
   const [isSwitchArmed, setIsSwitchArmed] = useState(false);
-  const [newTickerText, setNewTickerText] = useState('');
+  const [newAnnouncementText, setNewAnnouncementText] = useState('');
 
   // --- 30s INACTIVITY LOCK LOGIC ---
   const resetTimer = useCallback(() => {
@@ -65,7 +65,7 @@ const AdminPanel = () => {
         setShowDashboard(true);
         loadDashboardData();
         fetchSubscribers();
-        fetchTickerItems();
+        fetchAnnouncements();
       }
       setPageLoading(false);
     };
@@ -89,9 +89,9 @@ const AdminPanel = () => {
     setSubscribers(data || []);
   };
 
-  const fetchTickerItems = async () => {
+  const fetchAnnouncements = async () => {
     const { data } = await supabase.from('ticker_messages').select('*').order('created_at', { ascending: false });
-    setTickerItems(data || []);
+    setAnnouncements(data || []);
   };
 
   const handleLogin = async (e) => {
@@ -105,7 +105,7 @@ const AdminPanel = () => {
         setSession(data.session);
         loadDashboardData();
         fetchSubscribers();
-        fetchTickerItems();
+        fetchAnnouncements();
         setShowDashboard(true);
         setIsGreeting(false);
       }, 2000);
@@ -149,15 +149,15 @@ const AdminPanel = () => {
         await supabase.from('site_settings').update({ maintenance_mode: pendingAction.newStatus }).eq('id', 'global_config');
         setIsSwitchArmed(false); setMaintMode(pendingAction.newStatus);
         triggerToast(pendingAction.newStatus ? "System Locked" : "System Restored");
-      } else if (pendingAction.type === 'addTicker') {
-        await supabase.from('ticker_messages').insert([{ content: newTickerText }]);
-        setNewTickerText('');
-        fetchTickerItems();
-        triggerToast("Ticker Broadcasted");
-      } else if (pendingAction.type === 'deleteTicker') {
+      } else if (pendingAction.type === 'addAnnouncement') {
+        await supabase.from('ticker_messages').insert([{ content: newAnnouncementText }]);
+        setNewAnnouncementText('');
+        fetchAnnouncements();
+        triggerToast("Broadcast Sent Live");
+      } else if (pendingAction.type === 'deleteAnnouncement') {
         await supabase.from('ticker_messages').delete().eq('id', pendingAction.id);
-        fetchTickerItems();
-        triggerToast("Removed from feed");
+        fetchAnnouncements();
+        triggerToast("Announcement Removed");
       }
       loadDashboardData();
       setShowSecurity(false); setActionKey(''); setPendingAction(null);
@@ -240,8 +240,8 @@ const AdminPanel = () => {
           <nav style={styles.sidebar} className="sidebar">
             <div style={{marginBottom: '50px'}}><BrandHeader isSidebar={true} /></div>
             <div style={styles.menu}>
-              <div onClick={() => {setActiveTab('streams'); setIsMobileMenuOpen(false)}} style={styles.menuItem(activeTab === 'streams')}><FontAwesomeIcon icon={faLayerGroup} style={{width:'20px'}} /> Broadcasts</div>
-              <div onClick={() => {setActiveTab('ticker'); setIsMobileMenuOpen(false)}} style={styles.menuItem(activeTab === 'ticker')}><FontAwesomeIcon icon={faBullhorn} style={{width:'20px'}} /> Live Ticker</div>
+              <div onClick={() => {setActiveTab('streams'); setIsMobileMenuOpen(false)}} style={styles.menuItem(activeTab === 'streams')}><FontAwesomeIcon icon={faLayerGroup} style={{width:'20px'}} /> Live Status</div>
+              <div onClick={() => {setActiveTab('broadcast'); setIsMobileMenuOpen(false)}} style={styles.menuItem(activeTab === 'broadcast')}><FontAwesomeIcon icon={faBullhorn} style={{width:'20px'}} /> Broadcasts</div>
               <div onClick={() => {setActiveTab('devotees'); setIsMobileMenuOpen(false)}} style={styles.menuItem(activeTab === 'devotees')}><FontAwesomeIcon icon={faUsers} style={{width:'20px'}} /> Devotees</div>
               <div onClick={() => {setActiveTab('website'); setIsMobileMenuOpen(false)}} style={styles.menuItem(activeTab === 'website')}><FontAwesomeIcon icon={faShieldHalved} style={{width:'20px'}} /> Safety</div>
             </div>
@@ -250,14 +250,15 @@ const AdminPanel = () => {
 
           <main style={styles.main} className="main-content">
             <header style={styles.header}>
-              <h1 style={{fontFamily:'WanoQuin', color:'#2d0c01', fontSize:'40px', margin:0}}>{activeTab === 'ticker' ? 'Live Ticker' : activeTab}</h1>
+              <h1 style={{fontFamily:'WanoQuin', color:'#2d0c01', fontSize:'40px', margin:0}}>
+                {activeTab === 'broadcast' ? 'Announcement Hub' : activeTab}
+              </h1>
               <div style={styles.systemStatus(maintMode)}>
                 <div style={styles.statusDot(maintMode)}></div>
                 <span style={{fontSize: '12px', fontWeight: '800'}}>{maintMode ? 'SYSTEM LOCKED' : 'LIVE'}</span>
               </div>
             </header>
 
-            {/* TAB: STREAMS */}
             {activeTab === 'streams' && (
               <div style={styles.grid}>
                 {items.map(item => (
@@ -273,37 +274,41 @@ const AdminPanel = () => {
               </div>
             )}
 
-            {/* TAB: TICKER (New Changeable Section) */}
-            {activeTab === 'ticker' && (
+            {/* TAB: BROADCAST HUB */}
+            {activeTab === 'broadcast' && (
               <div style={{display:'flex', flexDirection:'column', gap:'30px'}}>
                 <div style={styles.card}>
-                  <h3 style={{marginTop:0}}>Push New Update</h3>
-                  <div style={{display:'flex', gap:'10px'}}>
-                    <input 
-                      style={styles.input} 
-                      placeholder="Enter news message here..." 
-                      value={newTickerText} 
-                      onChange={(e)=>setNewTickerText(e.target.value)} 
+                  <h3 style={{marginTop:0}}>Push Live Announcement</h3>
+                  <div style={{display:'flex', gap:'15px', flexDirection: 'column'}}>
+                    <textarea 
+                      style={{...styles.input, minHeight: '100px', resize: 'none'}} 
+                      placeholder="Type your announcement here..." 
+                      value={newAnnouncementText} 
+                      onChange={(e)=>setNewAnnouncementText(e.target.value)} 
                     />
                     <button 
-                      onClick={() => {setPendingAction({type:'addTicker'}); setShowSecurity(true)}} 
-                      style={{...styles.btn, width:'200px'}}
+                      onClick={() => {setPendingAction({type:'addAnnouncement'}); setShowSecurity(true)}} 
+                      style={{...styles.btn, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px'}}
                     >
-                      Broadcast
+                      <FontAwesomeIcon icon={faPaperPlane} /> Broadcast to Website
                     </button>
                   </div>
                 </div>
 
                 <div style={styles.card}>
-                  <h3 style={{marginTop:0}}>Active Feed</h3>
-                  {tickerItems.map(t => (
-                    <div key={t.id} style={{display:'flex', justifyContent:'space-between', padding:'15px 0', borderBottom:'1px solid rgba(0,0,0,0.05)'}}>
-                      <span>{t.content}</span>
-                      <button onClick={() => {setPendingAction({type:'deleteTicker', id:t.id}); setShowSecurity(true)}} style={{background:'none', border:'none', color:'#ef4444', cursor:'pointer'}}>
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </div>
-                  ))}
+                  <h3 style={{marginTop:0}}>Active Announcements</h3>
+                  {announcements.length === 0 ? (
+                    <p style={{opacity: 0.5}}>No active announcements.</p>
+                  ) : (
+                    announcements.map(t => (
+                      <div key={t.id} style={{display:'flex', justifyContent:'space-between', padding:'15px 0', borderBottom:'1px solid rgba(0,0,0,0.05)', alignItems: 'center'}}>
+                        <span style={{maxWidth: '85%'}}>{t.content}</span>
+                        <button onClick={() => {setPendingAction({type:'deleteAnnouncement', id:t.id}); setShowSecurity(true)}} style={{background:'rgba(239, 68, 68, 0.1)', border:'none', color:'#ef4444', width: '40px', height: '40px', borderRadius: '10px', cursor:'pointer'}}>
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             )}
@@ -333,7 +338,6 @@ const AdminPanel = () => {
             )}
           </main>
 
-          {/* --- INACTIVITY LOCK OVERLAY --- */}
           <AnimatePresence>
             {isLocked && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={styles.lockOverlay}>
@@ -360,14 +364,13 @@ const AdminPanel = () => {
             )}
           </AnimatePresence>
 
-          {/* Master Key Modal */}
           <AnimatePresence>
             {showSecurity && (
               <div style={styles.overlay}>
                 <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} style={styles.modal}>
                   <button onClick={() => setShowSecurity(false)} style={styles.backBtn}><FontAwesomeIcon icon={faChevronLeft} /></button>
                   <div style={{textAlign:'center', marginBottom:'30px'}}>
-                     <h2 style={{fontFamily:'WanoQuin', fontSize:'36px', color: '#2d0c01', margin:0}}>Authorize</h2>
+                      <h2 style={{fontFamily:'WanoQuin', fontSize:'36px', color: '#2d0c01', margin:0}}>Authorize</h2>
                   </div>
                   <form onSubmit={executeAction}>
                     <div style={styles.inputBox}>

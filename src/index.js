@@ -96,7 +96,7 @@ const router = createBrowserRouter([
   { path: "/live-day-1-hanuman-murti-inaugration", element: <MaintenanceGuard><Day1 /></MaintenanceGuard> },
   { path: "/live-day-2-hanuman-murti-inaugration", element: <MaintenanceGuard><Day2 /></MaintenanceGuard> },
   { path: "/live-day-3-hanuman-murti-inaugration", element: <MaintenanceGuard><Day3 /></MaintenanceGuard> },
-  { path: "/contact", element: <MaintenanceGuard><Contact /></MaintenanceGuard> },
+  { path: "/contact", element: <MaintenanceGuard><Contact /></MaintenanceGuard  > },
   { path: "/live-day-2-hanuman-murti-inaugration/morning-program", element: <MaintenanceGuard><Day2Morning /></MaintenanceGuard> },
   { path: "/live-day-2-hanuman-murti-inaugration/evening-program", element: <MaintenanceGuard><Day2Evening /></MaintenanceGuard> },
   { path: "/admin", element: <AdminPanel /> }, // Admin doesn't need the guard

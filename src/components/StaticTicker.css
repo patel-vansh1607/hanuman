@@ -1,0 +1,76 @@
+.premium-ticker-row {
+  /* Royal Maroon Gradient */
+  background: linear-gradient(90deg, #2d0c01 0%, #4a0e0e 50%, #2d0c01 100%);
+  border-bottom: 3px solid #F5D07E;
+  color: #F5D07E;
+  padding: 14px 0;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.ticker-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-yajman {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.mini-badge {
+  background: #F5D07E;
+  color: #2d0c01;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 3px 12px;
+  border-radius: 4px;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.yajman-text {
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+
+.org-pill {
+  font-size: 14px;
+  opacity: 0.85;
+  font-style: italic;
+  margin-left: 8px;
+  color: #fff; /* White for organizational text contrast */
+}
+
+.dot-sep {
+  font-size: 6px;
+  margin: 0 20px;
+  color: #F5D07E;
+  opacity: 0.6;
+}
+
+.secondary-name {
+  color: #F5D07E;
+}
+
+/* Mobile Responsiveness: Stacks on small screens but stays elegant */
+@media (max-width: 991px) {
+  .yajman-text {
+    flex-direction: column;
+    white-space: normal;
+    text-align: center;
+    gap: 5px;
+  }
+  .dot-sep { display: none; }
+  .mini-badge:last-child { display: none; }
+  .premium-ticker-row { padding: 15px 10px; }
+}

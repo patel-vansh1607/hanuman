@@ -4,7 +4,7 @@ import '../styles/Footer.css';
 const Footer = () => {
   return (
     <footer className="footer-container">
-      © Website designed by <a href="mailto:pvansh830@gmail.com" className="footer-link">Vansh Patel</a>
+      © Website developed & designed by <a href="mailto:pvansh830@gmail.com" className="footer-link">Vansh Patel</a>
     </footer>
   );
 };
