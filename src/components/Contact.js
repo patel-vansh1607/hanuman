@@ -20,7 +20,7 @@ const Contact = () => {
             
             <div className="chairman-details">
               <span className="rank-tag">Chairman</span>
-              <h1>Shri Sailesh Seth</h1>
+              <h1>Shri Shailesh Seth</h1>
               <p className="chairman-quote">
                 "Service to humanity is the highest form of worship. Our doors are always open for the devotees."
               </p>
