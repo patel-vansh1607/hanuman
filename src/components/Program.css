@@ -1,0 +1,216 @@
+/* Import professional fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;700&family=Pinyon+Script&family=Poppins:wght@400;600&display=swap');
+
+@font-face {
+    font-family: WanoQuin;
+    src: url(../assets/wano-quin-wano-quin-regular-400.ttf);
+}
+
+.program-page-root {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.program-container {
+    background-color: #fdf6e3;
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #2d0c01;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header Typography - Your 6.8rem Fix */
+.program-header {
+    text-align: center;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.program-header h1 {
+    font-family: 'WanoQuin', serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 10vw, 6.8rem); 
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-family: 'Poppins', sans-serif;
+    color: #8b0000;
+    margin-top: 0;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+}
+
+/* Time Switcher Buttons */
+.time-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+.time-switcher button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: 1px solid #5d1400;
+    background: white;
+    color: #5d1400;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.time-switcher button.active {
+    background: #5d1400;
+    color: #f5d07e;
+    box-shadow: 0 4px 15px rgba(93, 20, 0, 0.2);
+}
+
+/* Time Box Design */
+.time-box {
+    min-width: 100px;
+    background: rgba(139, 0, 0, 0.05);
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    margin-right: 15px;
+    border: 1px solid rgba(139, 0, 0, 0.1);
+}
+
+.converted-time {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #2d0c01;
+}
+
+.converted-date {
+    display: block;
+    font-size: 0.65rem;
+    color: #8b0000;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Program Cards */
+.program-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.day-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 2px solid #5d1400;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.event-item {
+    display: flex;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.event-details {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2d0c01;
+}
+
+.back-btn {
+    align-self: flex-start;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    background: #5d1400;
+    color: #f5d07e;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+/* MOBILE FIXES */
+@media (max-width: 600px) {
+    .program-container { padding: 20px 10px; }
+    .program-header h1 { font-size: 3.2rem; }
+    .time-switcher { flex-direction: column; width: 100%; align-items: center; }
+    .time-switcher button { width: 80%; justify-content: center; }
+    .event-item { flex-direction: row; align-items: center; }
+    .time-box { min-width: 85px; margin-right: 10px; }
+    .event-details { font-size: 0.9rem; }
+}
+.tool-instruction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    margin-bottom: -15px; /* Pulls switcher closer */
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    color: #8b0000;
+    opacity: 0.8;
+}
+
+.info-icon {
+    font-size: 0.9rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-3px);}
+    60% {transform: translateY(-2px);}
+}
+
+/* Make sure buttons stand out as clickable */
+.time-switcher button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(93, 20, 0, 0.1);
+}
+.time-meta {
+    display: flex;
+    flex-direction: column; /* Stacked for better readability of city names */
+    align-items: center;
+    gap: 2px;
+    margin-top: 4px;
+}
+
+.timezone-tag {
+    background: #8b0000;
+    color: #fdf6e3;
+    font-size: 0.55rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.time-box {
+    min-width: 115px;
+    background: rgba(139, 0, 0, 0.05);
+    padding: 12px 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(139, 0, 0, 0.1);
+}

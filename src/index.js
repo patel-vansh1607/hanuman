@@ -12,6 +12,7 @@ const Contact = lazy(() => import('./components/Contact'));
 const Day2Morning = lazy(() => import('./components/Day2Morning'));
 const Day2Evening = lazy(() => import('./components/Day2Evening'));
 const AdminPanel = lazy(() => import('./components/Adminpanel'));
+const Program = lazy(() => import('./components/Program'));
 const Maintenance = lazy(() => import('./components/Maintainance'));
 const NotFound = lazy(() => import('./components/NotFound'));
 
@@ -96,9 +97,10 @@ const router = createBrowserRouter([
   { path: "/live-day-1-hanuman-murti-inaugration", element: <MaintenanceGuard><Day1 /></MaintenanceGuard> },
   { path: "/live-day-2-hanuman-murti-inaugration", element: <MaintenanceGuard><Day2 /></MaintenanceGuard> },
   { path: "/live-day-3-hanuman-murti-inaugration", element: <MaintenanceGuard><Day3 /></MaintenanceGuard> },
-  { path: "/contact", element: <MaintenanceGuard><Contact /></MaintenanceGuard  > },
+  { path: "/contact", element: <MaintenanceGuard><Contact /></MaintenanceGuard> },
   { path: "/live-day-2-hanuman-murti-inaugration/morning-program", element: <MaintenanceGuard><Day2Morning /></MaintenanceGuard> },
   { path: "/live-day-2-hanuman-murti-inaugration/evening-program", element: <MaintenanceGuard><Day2Evening /></MaintenanceGuard> },
+  { path: "/program-schedule", element: <MaintenanceGuard><Program /></MaintenanceGuard> },
   { path: "/admin", element: <AdminPanel /> }, // Admin doesn't need the guard
   { path: "*", element: <NotFound /> },
 ]);
@@ -108,3 +110,20 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
+// Global Reset for Padding and Margins
+const style = document.createElement('style');
+style.innerHTML = `
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden; /* Prevents horizontal scroll on mobile */
+  }
+`;
+document.head.appendChild(style);

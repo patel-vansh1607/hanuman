@@ -9,7 +9,9 @@ const Navbar = () => {
         {/* LEFT NAV */}
         <nav className="header-nav">
           <a href="/">Home</a>
+          <a href="/program-schedule">Program</a>
           <a href="/contact">Contact</a>
+
         </nav>
 
         {/* CENTER BRAND */}
