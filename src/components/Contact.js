@@ -57,8 +57,9 @@ const Contact = () => {
             <div className="badge"><HelpCircle size={12} /> LIVE HELP</div>
             <span className="cursive-small">Need a hand?</span>
             <h3>Technical Desk</h3>
-            <p>Issues with the Stream or Website?</p>
-            <ContactRow label="IT Support" name="Vanshbhai" phone="0748660944" /><br></br>
+            {/* Change this line in the Technical Desk section */}
+            <ContactRow label="IT Support" name="Vanshbhai" phone="0748660944" />
+            <br /> 
             <p>Issues with the Audio?</p>
             <ContactRow label="Music" name="Mishaalbhai" phone="0728687000" />
           </motion.div>
