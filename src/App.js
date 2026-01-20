@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import Footer from './components/Footer';
 import Mainbar from './components/Mainbar';
@@ -34,22 +34,22 @@ function App() {
   const [showAnnouncements, setShowAnnouncements] = useState(false);
   const [hasNew, setHasNew] = useState(false);
 
-  // PRE-LOAD PREMIUM SOUNDS
-  const softClick = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); 
-  const announcementSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3');
-  
-  // Set volume (0.0 to 1.0)
-  softClick.volume = 0.4; 
-  announcementSound.volume = 0.5;
+  // Memoize sounds so they aren't re-created on every render
+  const sounds = useMemo(() => {
+    const click = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
+    const ann = new Audio('https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3');
+    click.volume = 0.4;
+    ann.volume = 0.5;
+    return { click, ann };
+  }, []);
 
   useEffect(() => {
-    // GLOBAL CLICK LISTENER
+    // GLOBAL CLICK LISTENER (Fixes Line 99 Warning)
     const handleGlobalClick = (e) => {
-      // Plays sound if user clicks a button, a link, or anything with a pointer cursor
       const target = e.target.closest('button, a, .btn-text');
       if (target) {
-        softClick.currentTime = 0; // Reset to start if clicked rapidly
-        softClick.play().catch(() => {}); // Catch prevents errors if browser blocks audio
+        sounds.click.currentTime = 0;
+        sounds.click.play().catch(() => {});
       }
     };
 
@@ -96,10 +96,10 @@ function App() {
       window.removeEventListener('offline', handleStatus);
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [sounds]); // Added sounds as a dependency
 
   const openAnnouncements = () => {
-    announcementSound.play().catch(() => {});
+    sounds.ann.play().catch(() => {});
     setShowAnnouncements(true);
     setHasNew(false);
   };
@@ -128,7 +128,6 @@ function App() {
       <p className='ttt'>Please Select the day you want to view</p> 
 
       <div className="all">
-        {/* BUTTONS WILL AUTOMATICALLY TRIGGER SOUND */}
         <a href="/live-day-1-hanuman-murti-inaugration" className="btn-text">
           <div className="btn-content">
             <span>Day 1 | Friday, 23 January 2026</span>
@@ -167,17 +166,21 @@ function App() {
                 <button onClick={() => setShowAnnouncements(false)} className="close-ann"><FontAwesomeIcon icon={faXmark} /></button>
               </div>
               <div className="ann-body">
-                {announcements.map((ann) => (
-                  <div key={ann.id} className="ann-item">
-                    <p>{ann.content}</p>
-                    <div className="ann-meta">
-                      <span><FontAwesomeIcon icon={faCalendarDays} style={{marginRight: '5px'}} /> 
-                        {new Date(ann.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                      </span>
-                      <span>{new Date(ann.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-                    </div>
-                  </div>
-                ))}
+                {announcements.length > 0 ? (
+                    announcements.map((ann) => (
+                      <div key={ann.id} className="ann-item">
+                        <p>{ann.content}</p>
+                        <div className="ann-meta">
+                          <span><FontAwesomeIcon icon={faCalendarDays} style={{marginRight: '5px'}} /> 
+                            {new Date(ann.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </span>
+                          <span>{new Date(ann.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        </div>
+                      </div>
+                    ))
+                ) : (
+                    <p style={{textAlign: 'center', opacity: 0.6, padding: '20px'}}>No announcements yet.</p>
+                )}
               </div>
             </motion.div>
           </motion.div>

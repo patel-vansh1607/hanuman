@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../supabaseClient';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -9,10 +9,14 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
 
   const isTransitioning = isStinger || isResuming;
 
+  // Reset count when a transition starts
   useEffect(() => {
-    setCount(5);
-  }, [isStinger, isResuming]);
+    if (isTransitioning) {
+      setCount(5);
+    }
+  }, [isTransitioning]);
 
+  // Handle countdown and completion
   useEffect(() => {
     if (isTransitioning && count > 0) {
       const timer = setTimeout(() => setCount(count - 1), 1000);
@@ -22,12 +26,15 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
     }
   }, [count, isTransitioning, onComplete]);
 
+  // Auto-hide toast notification (Fixed Warning)
   useEffect(() => {
     if (toast.show) {
-      const timer = setTimeout(() => setToast({ ...toast, show: false }), 4000);
+      const timer = setTimeout(() => {
+        setToast(prev => ({ ...prev, show: false }));
+      }, 4000);
       return () => clearTimeout(timer);
     }
-  }, [toast.show]);
+  }, [toast.show]); // Now properly tracks the show state
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
@@ -55,8 +62,6 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-          
-          /* Only the input and toast get Poppins */
           .poppins-text { font-family: 'Poppins', sans-serif !important; }
 
           @keyframes pulse-green {
@@ -113,7 +118,6 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
         )}
       </AnimatePresence>
 
-      {/* MAIN CONTENT AREA */}
       {!isTransitioning && (
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}} className="main-container">
           <div className="img-wrapper" style={styles.imgWrapperBase}>
@@ -133,7 +137,7 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
                 <input 
                   type="email" 
                   placeholder="your@email.com" 
-                  className="poppins-text" // Applying Poppins here
+                  className="poppins-text"
                   style={styles.input} 
                   value={email} 
                   onChange={(e) => setEmail(e.target.value)} 
@@ -155,14 +159,14 @@ const Maintenance = ({ isStinger, isResuming, onComplete }) => {
         </motion.div>
       )}
 
-      {/* MODERN UPGRADED TOAST */}
+      {/* TOAST NOTIFICATION */}
       <AnimatePresence>
         {toast.show && (
           <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.9, x: '-50%' }}
             animate={{ opacity: 1, y: 0, scale: 1, x: '-50%' }}
             exit={{ opacity: 0, y: 20, scale: 0.9, x: '-50%' }}
-            className="poppins-text" // Applying Poppins here
+            className="poppins-text"
             style={{
               ...styles.toast,
               borderLeft: `6px solid ${
@@ -204,25 +208,12 @@ const styles = {
   jai: { fontSize: '1.5rem', color: '#4a2c1a', margin: 0, fontWeight: '900' },
   date: { fontSize: '13px', color: '#8b4513', fontWeight: 'bold' },
   toast: {
-    position: 'fixed',
-    bottom: '40px',
-    left: '50%',
-    background: 'rgba(255, 255, 255, 0.95)',
-    backdropFilter: 'blur(10px)',
-    color: '#4a2c1a',
-    padding: '16px 28px',
-    borderRadius: '16px',
-    fontWeight: '600',
-    zIndex: 20000,
-    boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
-    fontSize: '15px',
-    textAlign: 'center',
-    minWidth: '320px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    letterSpacing: '0.5px',
-    border: '1px solid rgba(255,255,255,0.3)'
+    position: 'fixed', bottom: '40px', left: '50%', background: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(10px)', color: '#4a2c1a', padding: '16px 28px',
+    borderRadius: '16px', fontWeight: '600', zIndex: 20000,
+    boxShadow: '0 20px 40px rgba(0,0,0,0.15)', fontSize: '15px', textAlign: 'center',
+    minWidth: '320px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    letterSpacing: '0.5px', border: '1px solid rgba(255,255,255,0.3)'
   }
 };
 

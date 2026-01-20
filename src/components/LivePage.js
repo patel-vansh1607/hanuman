@@ -17,11 +17,18 @@ const LivePage = ({ programmeId }) => {
 
     // REALTIME LISTENER
     const channel = supabase.channel(`live-${programmeId}`)
-      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'programmes', filter: `id=eq.${programmeId}` }, 
+      .on('postgres_changes', { 
+        event: 'UPDATE', 
+        schema: 'public', 
+        table: 'programmes', 
+        filter: `id=eq.${programmeId}` 
+      }, 
       (payload) => setData(payload.new)).subscribe();
 
-    return () => supabase.removeChannel(channel);
-  }, [programmeId]);
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [programmeId]); // programmeId is the correct dependency here
 
   if (!data) return null;
 
@@ -30,16 +37,19 @@ const LivePage = ({ programmeId }) => {
       <NewsTicker />
       <Navbar />
       
-      {/* YOUR DESIGN ALWAYS SHOWS */}
       <div className="content-container">
         <h1 className='p1'>{data.title} | Hanuman Dada Murti Inauguration</h1>
         
         <div className="video-wrapper">
           {/* ONLY SHOW IFRAME IF STATUS IS LIVE OR COMPLETED */}
           {(data.status === 'live' || data.status === 'completed') ? (
-            <iframe width="560" height="315" 
+            <iframe 
+              width="560" 
+              height="315" 
+              title={`${data.title} Live Stream`} // Added unique title to fix ESLint warning
               src={`https://www.youtube.com/embed/${data.video_id}`} 
-              frameBorder="0" allowFullScreen>
+              frameBorder="0" 
+              allowFullScreen>
             </iframe>
           ) : (
             /* IF UPCOMING, SHOW YOUR "NOT READY" BOX */
@@ -57,4 +67,5 @@ const LivePage = ({ programmeId }) => {
     </div>
   );
 };
+
 export default LivePage;
