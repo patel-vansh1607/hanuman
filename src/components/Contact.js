@@ -59,7 +59,6 @@ const Contact = () => {
             <h3>Technical Desk</h3>
             {/* Change this line in the Technical Desk section */}
             <ContactRow label="IT Support" name="Vanshbhai" phone="0748660944" />
-            <br /> 
             <p>Issues with the Audio?</p>
             <ContactRow label="Music" name="Mishaalbhai" phone="0728687000" />
           </motion.div>
