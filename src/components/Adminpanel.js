@@ -2,8 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '../supabaseClient';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  faLayerGroup, faShieldHalved, faArrowRightFromBracket, 
-  faLock, faCircleNotch, faUsers, faCheckCircle, 
+  faLayerGroup, faShieldHalved, faArrowRightFromBracket, faCircleNotch, faUsers, faCheckCircle, 
   faBars, faChevronLeft, faKey, faXmark, faBullhorn, faTrash, faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
