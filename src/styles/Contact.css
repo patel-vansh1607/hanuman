@@ -1,253 +1,214 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Shadows+Into+Light&display=swap');
 
-/* GLOBAL WRAPPER */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 .contact-page-wrapper {
   background: #fdfaf0;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
   color: #2d0c01;
 }
-/* Add this at the very top of Contact.css */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-.contact-main-content h1, 
-.contact-main-content p, 
-.contact-main-content section {
-  margin-top: 0; /* Forces internal margins to zero */
-}
 .contact-main-content {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
 }
 
-/* HUMAN HERO (CHAIRMAN) */
+/* TYPOGRAPHY */
+.cursive-text { font-family: 'Shadows Into Light', cursive; font-size: 26px; color: #8B0000; }
+.cursive-small { font-family: 'Shadows Into Light', cursive; font-size: 20px; }
+.gold { color: #f5c518; }
+
+/* CHAIRMAN HERO */
 .human-hero {
-  background: #ffffff;
-  border-radius: 40px 10px 40px 10px;
-  padding: 50px;
-  box-shadow: 0 20px 50px rgba(139, 0, 0, 0.05);
+  background: white;
+  border-radius: 35px;
+  padding: 40px;
+  box-shadow: 0 15px 40px rgba(45, 12, 1, 0.05);
+  margin-bottom: 40px;
   border: 1px solid rgba(139, 0, 0, 0.05);
-  margin-bottom: 30px;
 }
 
-.hero-flex { display: flex; align-items: center; gap: 50px; }
+.hero-flex { display: flex; align-items: center; gap: 40px; }
 
 .organic-blob {
-  width: 160px; height: 160px;
-  background: #8B0000;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 40%;
+  width: 140px; height: 140px;
+  background: linear-gradient(135deg, #8B0000, #4a0e0e);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 15px 15px 0 #f5c518;
-  flex-shrink: 0;
+  font-size: 50px; color: white;
+  box-shadow: 10px 10px 0 #f5c518;
 }
 
-.portrait-inner { font-size: 55px; }
-
-.handwritten {
-  font-family: 'Shadows Into Light', cursive;
-  color: #8B0000;
-  font-size: 22px;
-  display: block;
+.main-wa-btn {
+  background: #25d366; color: white !important;
+  padding: 12px 25px; border-radius: 12px;
+  text-decoration: none; font-weight: 600;
+  display: inline-block; transition: 0.3s;
 }
-
-.content-side h1 { font-size: 36px; font-weight: 700; margin: 5px 0; }
-.philosophy-text { font-style: italic; opacity: 0.8; line-height: 1.6; margin-bottom: 25px; font-size: 15px; }
-
-.personal-actions { display: flex; gap: 12px; }
-.human-btn {
-  padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 13px;
-  transition: all 0.3s ease;
-}
-.human-btn.wa { background: #2d0c01; color: white; }
-.human-btn.mail { border: 1.5px solid #2d0c01; color: #2d0c01; }
-.human-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
 /* BENTO GRID */
-.human-grid {
-  display: grid; 
-  grid-template-columns: 1.2fr 0.8fr; 
-  gap: 20px; 
-  margin-bottom: 30px;
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
-/* SEWA / DONATION CARD */
-.sewa-card {
-  background: #8B0000;
-  border-radius: 30px;
-  padding: 35px;
-  color: white;
+.bento-item {
+  background: white;
+  border-radius: 28px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.03);
 }
 
-.sewa-header h3 { font-size: 24px; color: #f5c518; margin-bottom: 8px; }
-.sewa-header p { font-size: 14px; opacity: 0.9; line-height: 1.5; margin-bottom: 25px; }
+.span-2 { grid-column: span 2; }
 
-.mpesa-vault-card {
-  background: #ffffff;
-  border-radius: 20px;
-  color: #2d0c01;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.vault-top { display: flex; justify-content: space-between; border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 15px; }
-.m-brand { color: #40ae49; font-weight: 800; font-size: 14px; }
-.secure-tag { font-size: 9px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
-
-.vault-row { display: flex; justify-content: space-between; }
-.vault-column small { display: block; font-size: 9px; font-weight: 700; color: #777; margin-bottom: 4px; }
-.highlight-text { font-size: 20px; font-weight: 800; color: #8B0000; }
-
-.vault-footer { margin-top: 15px; font-size: 10px; opacity: 0.6; text-align: center; font-style: italic; }
-
-/* ASSISTANCE CARD */
-.assistance-card {
-  background: #fff9e6; /* Sun-kissed paper */
-  border-radius: 30px;
-  padding: 35px;
-  border: 1px solid rgba(212, 163, 115, 0.2);
-  box-shadow: 8px 8px 0px rgba(45, 12, 1, 0.03);
+/* PREMIUM CONTACT ROWS */
+.premium-contact-row {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
 }
 
-.card-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-.avatar-stack { display: flex; }
-.mini-avatar { 
-  width: 32px; height: 32px; background: white; border-radius: 50%; 
-  display: flex; align-items: center; justify-content: center; 
-  border: 2px solid #fff9e6; margin-right: -8px; font-size: 14px;
+.contact-info small {
+  display: block; font-size: 10px; text-transform: uppercase;
+  color: #8B0000; font-weight: 700; letter-spacing: 0.5px;
 }
 
-.live-status { font-size: 9px; font-weight: 700; color: #25d366; background: white; padding: 4px 8px; border-radius: 20px; display: flex; align-items: center; }
-.pulse-dot { width: 6px; height: 6px; background: #25d366; border-radius: 50%; margin-right: 5px; animation: pulse 1.5s infinite; }
+.contact-info span { font-weight: 600; font-size: 15px; color: #2d0c01; }
 
-.maroon { color: #8B0000; }
-.gold { color: #f5c518; }
-.handwritten-small { font-family: 'Shadows Into Light', cursive; font-size: 20px; margin-bottom: 2px; }
-.premium-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
-.human-description { font-size: 13px; line-height: 1.6; color: #55433c; margin-bottom: 20px; }
+.contact-actions { display: flex; gap: 8px; }
 
-.human-link-btn {
-  background: #8B0000; color: white; border: none; padding: 10px 20px; border-radius: 10px;
-  font-weight: 600; font-size: 12px; cursor: pointer; transition: 0.3s;
+.icon-btn {
+  width: 35px; height: 35px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; font-size: 12px; font-weight: 800;
+  transition: 0.2s;
 }
 
-.signature-mark { font-family: 'Shadows Into Light', cursive; font-size: 16px; opacity: 0.4; transform: rotate(-5deg); }
+.icon-btn.call { background: #fdfaf0; color: #2d0c01; border: 1px solid #eee; }
+.icon-btn.whatsapp { background: #25d366; color: white; }
+.icon-btn:hover { transform: scale(1.1); }
 
-/* LOCATION ANCHOR (BOTTOM) */
+/* CARD SPECIALS */
+.tech-card { background: #2d0c01; color: white; }
+.tech-card h3 { color: #f5c518; margin-bottom: 5px; }
+.tech-card p { font-size: 13px; opacity: 0.7; margin-bottom: 15px; }
+.tech-card .premium-contact-row { border-bottom-color: rgba(255,255,255,0.1); }
+.tech-card .contact-info span { color: white; }
+
+.sewa-card { background: #8B0000; color: white; }
+.mpesa-glass-card {
+  background: rgba(255,255,255,0.1);
+  padding: 15px; border-radius: 18px; margin-top: 15px;
+}
+.mpesa-line { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.mpesa-line strong { color: #f5c518; }
+.mpesa-sub { font-size: 10px; text-align: center; opacity: 0.6; margin-top: 5px; }
+
+.standard-card { background: #fffcf5; }
+.standard-card h4 { color: #8B0000; margin-bottom: 10px; }
+
+.split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* EMERGENCY */
+.emergency-card { background: #fff5f5; border: 1px solid #feb2b2; }
+.emergency-divider { height: 1px; background: #feb2b2; margin: 15px 0; }
+.eme-btn {
+  display: block; font-size: 22px; font-weight: 900;
+  color: #e53e3e; text-decoration: none; text-align: center;
+}
+
+/* FOOTER ANCHOR */
 .location-anchor {
-  background: #2d0c01;
-  color: white;
-  border-radius: 40px;
-  padding: 40px;
-  margin-top: 20px;
+  background: #2d0c01; color: white; padding: 40px;
+  border-radius: 35px; margin-top: 30px;
 }
-
-.anchor-content { display: flex; justify-content: center; align-items: center; gap: 60px; }
-.info-block label { font-size: 10px; color: #f5c518; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
-.info-block h3 { font-size: 22px; margin-top: 4px; font-weight: 600; }
-.v-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.1); }
-
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+.anchor-content { display: flex; justify-content: center; gap: 50px; text-align: center; }
+.anchor-content label { color: #f5c518; font-size: 10px; letter-spacing: 2px; }
+.v-sep { width: 1px; background: rgba(255,255,255,0.1); }
 
 /* RESPONSIVE */
-@media (max-width: 850px) {
+@media (max-width: 992px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .span-2 { grid-column: span 1; }
+  .split-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
   .hero-flex { flex-direction: column; text-align: center; }
-  .human-grid { grid-template-columns: 1fr; }
-  .anchor-content { flex-direction: column; gap: 30px; text-align: center; }
-  .v-divider { display: none; }
-  .personal-actions { justify-content: center; }
+  .bento-grid { grid-template-columns: 1fr; }
+  .anchor-content { flex-direction: column; gap: 20px; }
+  .v-sep { display: none; }
 }
-/* UNIQUE CHAIRMAN WHATSAPP BUTTON */
-.chairman-wa-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: #25d366; /* Official WhatsApp Green */
-  color: #ffffff !important;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.15);
-  transition: all 0.3s ease;
+.contact-info {
+    display: flex;
+    flex-direction: column;
 }
 
-.chairman-wa-link:hover {
-  background: #128c7e; /* Darker WhatsApp Teal */
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(37, 211, 102, 0.25);
-  color: #ffffff !important;
+.name-text {
+    font-weight: 600;
+    font-size: 15px;
+    color: #2d0c01;
 }
 
-/* UNIQUE ICON FOR THIS BUTTON */
-.wa-logo-unique {
-  width: 20px;
-  height: 20px;
-  fill: white;
-  flex-shrink: 0;
+.phone-subtext {
+    font-size: 12px;
+    color: #8B0000;
+    font-weight: 500;
+    margin-top: -2px;
 }
 
-.chairman-wa-link:hover .wa-logo-unique {
-  animation: wa-bounce 0.6s infinite alternate;
+.tech-card .phone-subtext {
+    color: #f5c518;
 }
 
-@keyframes wa-bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-3px); }
+/* ICON BUTTONS */
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
-/* Ensure the other button "human-link-btn" remains untouched */
-.human-link-btn.whatsapp-style {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px; /* Space between logo and text */
-  text-decoration: none;
-  background: #25d366;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 14px;
-  font-weight: 600;
-  font-size: 14px;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+.call-style {
+    background: #fdfaf0;
+    color: #2d0c01;
+    border: 1px solid #e0d8c0;
 }
 
-.wa-icon {
-  width: 20px;
-  height: 20px;
+.wa-style {
+    background: #25d366;
+    color: white;
 }
 
-.human-link-btn.whatsapp-style:hover {
-  background: #1ebea5; /* Bright WhatsApp Teal */
-  transform: scale(1.05) translateX(5px);
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+/* TITLES WITH ICONS */
+.standard-card h4, .emergency-card h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
 }
 
-.human-link-btn.whatsapp-style .arrow {
-  margin-left: 5px;
-  opacity: 0.8;
-  transition: transform 0.3s ease;
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.human-link-btn.whatsapp-style:hover .arrow {
-  transform: translateX(4px);
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-/* Add a slight bounce to the logo on hover */
-.human-link-btn.whatsapp-style:hover .wa-icon {
-  animation: bounce 0.5s ease infinite alternate;
-}
-
-@keyframes bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-2px); }
+/* MPESA LOGO AREA */
+.card-icon-top {
+    margin-bottom: 10px;
 }

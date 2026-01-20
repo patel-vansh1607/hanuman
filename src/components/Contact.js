@@ -1,165 +1,134 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Phone, MessageCircle, Info, Shield, Truck, Utensils, Music, Paintbrush, HelpCircle } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import '../styles/Contact.css';
 
 const Contact = () => {
+  const wa = (num, name) => `https://wa.me/254${num.substring(1)}?text=Namaste%20${name},%20I%20am%20reaching%20out%20regarding%20the%20Hanuman%20Mahotsav.`;
+
+  const ContactRow = ({ label, name, phone }) => (
+    <div className="premium-contact-row">
+      <div className="contact-info">
+        <small>{label}</small>
+        <span className="name-text">{name}</span>
+        <span className="phone-subtext">{phone}</span>
+      </div>
+      <div className="contact-actions">
+        <a href={`tel:${phone}`} className="icon-btn call-style" title="Call">
+          <Phone size={16} />
+        </a>
+        <a href={wa(phone, name)} target="_blank" rel="noreferrer" className="icon-btn wa-style" title="WhatsApp">
+          <MessageCircle size={16} />
+        </a>
+      </div>
+    </div>
+  );
+
   return (
     <div className="contact-page-wrapper">
       <Navbar />
       
       <main className="contact-main-content">
         
-        {/* SECTION 1: PERSONAL HERO (CHAIRMAN) */}
-        <motion.section 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="human-hero"
-        >
+        {/* CHAIRMAN HERO */}
+        <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="human-hero">
           <div className="hero-flex">
             <div className="portrait-side">
-              <div className="organic-blob">
-                <div className="portrait-inner">🙏</div>
-              </div>
+              <div className="organic-blob">🙏</div>
             </div>
-            
             <div className="content-side">
-              <span className="handwritten">A message from the Chairman</span>
-              <h1>Shri Shailesh Sheth</h1>
-              <p className="philosophy-text">
-                "Our doors are always open, and our hearts are always ready to serve. 
-                Feel free to reach out to me directly or our team below."
-              </p>
-              <div className="personal-actions">
-                <a 
-  href="https://wa.me/254733638311?text=Namaste%20Shri%20Sailesh%20Seth,%20I%20am%20reaching%20out%20regarding%20the%20Hanuman%20Mahotsav." 
-  target="_blank" 
-  rel="noopener noreferrer"
-  className="human-btn chairman-wa-link"
->
-  <svg 
-    className="wa-logo-unique" 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
-  <span>Connect on WhatsApp</span>
-</a>
-              </div>
+              <span className="cursive-text">A message from the Chairman</span>
+              <h1>Shaileshbhai Sheth</h1>
+              <p className="philosophy-text">"Our doors are always open, and our hearts are always ready to serve."</p>
+              <a href={wa('0733638311', 'Shailesh%20Sheth')} target="_blank" rel="noreferrer" className="main-wa-btn">
+                <MessageCircle size={20} style={{marginRight: '8px'}} />
+                Connect on WhatsApp
+              </a>
             </div>
           </div>
         </motion.section>
 
-        {/* SECTION 2: THE HUMAN GRID */}
-        <div className="human-grid">
+        <div className="bento-grid">
           
-          {/* DONATION CARD: SEWA */}
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="sewa-card"
-          >
-            <div className="sewa-content">
-              <div className="sewa-header">
-                <span className="handwritten-small gold">Sewa and Contributions</span>
-                <h3>Support the Mahotsav</h3>
-              </div>
+          {/* TECHNICAL DESK */}
+          <motion.div whileHover={{ scale: 1.01 }} className="bento-item tech-card">
+            <div className="badge"><HelpCircle size={12} /> LIVE HELP</div>
+            <span className="cursive-small">Need a hand?</span>
+            <h3>Technical Desk</h3>
+            <p>Issues with the Stream or Website?</p>
+            <ContactRow label="IT Support" name="Vanshbhai" phone="0748660944" /><br></br>
+            <p>Issues with the Audio?</p>
+            <ContactRow label="Music" name="Mishaalbhai" phone="0728687000" />
+          </motion.div>
 
-              {/* HIGH READABILITY MPESA CARD */}
-              <div className="mpesa-vault-card">
-                <div className="vault-top">
-                  <span className="m-brand">PRIME BANK NAKURU</span>
-                </div>
-                <div className="vault-body">
-                  <div className="vault-row">
-                    <div className="vault-column">
-                      <small>PAYBILL NUMBER</small>
-                      <strong className="highlight-text">982800</strong>
-                    </div>
-                    <div className="vault-column">
-                      <small>ACCOUNT NUMBER</small>
-                      <strong className="highlight-text">2000158651</strong>
-                    </div>
-                  </div>
-                </div>
-                <div className="vault-footer">
-                  Cutchi Gujarati Hindu Union
-                </div>
+          {/* SEWA CARD */}
+          <motion.div whileHover={{ scale: 1.01 }} className="bento-item sewa-card">
+            <div className="card-icon-top"><Info size={24} color="#f5c518" /></div>
+            <span className="cursive-small gold">Support</span>
+            <h3>Sewa & Contributions</h3>
+            <div className="mpesa-glass-card">
+              <div className="mpesa-line"><span>PAYBILL</span><strong>982800</strong></div>
+              <div className="mpesa-line"><span>ACC</span><strong>2000158651</strong></div>
+              <div className="mpesa-sub">Prime Bank Nakuru • Cutchi Gujrati Hindu Union</div>
+            </div>
+          </motion.div>
+
+          {/* ACCOMMODATION & TRANSPORT */}
+          <motion.div className="bento-item standard-card">
+            <h4><Truck size={18} /> Logistics & Stay</h4>
+            <ContactRow label="Accommodation" name="Jigneshbhai" phone="0733711525" />
+            <ContactRow label="Transport" name="Samratbhai" phone="0780230020" />
+            <ContactRow label="Transport" name="Urmishbhai" phone="0700641528" />
+          </motion.div>
+
+          {/* KITCHEN TEAM */}
+          <motion.div className="bento-item standard-card">
+            <h4><Utensils size={18} /> Kitchen & Serving</h4>
+            <ContactRow label="Kitchen" name="Bhaviniben" phone="0733736010" />
+            <ContactRow label="Serving" name="Swatiben" phone="0738717481" />
+            <ContactRow label="Serving" name="Hirenbhai" phone="0719333284" />
+          </motion.div>
+
+          {/* STAGE & DECOR */}
+          <motion.div className="bento-item standard-card span-2">
+            <div className="title-row">
+                <h4><Paintbrush size={18} /> Drama & Decor</h4>
+                <Music size={18} color="#8B0000" />
+            </div>
+            <div className="split-grid">
+              <div>
+                <ContactRow label="Drama/Stage" name="Bhavikaben" phone="0735109880" />
+                <ContactRow label="Drama/Stage" name="Jaybhai" phone="0784066033" />
+              </div>
+              <div>
+                <ContactRow label="Decor" name="Dipakbhai" phone="0724919700" />
               </div>
             </div>
           </motion.div>
 
-          {/* SUPPORT CARD: TECHNICAL DESK */}
-          <motion.div 
-            whileHover={{ rotate: 1, y: -5 }}
-            className="assistance-card"
-          >
-            <div className="card-ink-wrapper">
-              <div className="card-top-row">
-                <div className="avatar-stack">
-                  <div className="mini-avatar">👨‍💻</div>
-                  <div className="mini-avatar">👩‍🔧</div>
-                </div>
-                <span className="live-status">
-                  <span className="pulse-dot"></span> Online Now
-                </span>
-              </div>
-
-              <span className="handwritten-small maroon">Need a hand?</span>
-              <h3 className="premium-title">Technical Desk</h3>
-              
-              <p className="human-description">
-                Experiencing a lag in the Youtube stream? Or maybe you have questions about the website? Our team is live and ready to guide you.
-              </p>
-
-              <div className="support-actions">
-                <a 
-  href="https://wa.me/254748660944?text=Hello%20Technical%20Team,%20I%20need%20assistance%20regarding%20the%20live%20stream." 
-  target="_blank" 
-  rel="noopener noreferrer"
-  className="human-link-btn whatsapp-style"
->
-  <svg 
-    className="wa-icon" 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
-  <span>Report an Issue</span>
-  <span className="arrow">→</span>
-</a>
-                <div className="signature-mark">Seva Team</div>
-              </div>
-            </div>
+          {/* SECURITY & EMERGENCY */}
+          <motion.div className="bento-item emergency-card">
+            <h4><Shield size={18} /> Security & Safety</h4>
+            <ContactRow label="Security" name="Maulikbhai" phone="0721222616" />
+            <div className="emergency-divider"></div>
+            <small>AMBULANCE (NW Hospital)</small>
+            <a href="tel:0709667000" className="eme-btn">0709 667000</a>
           </motion.div>
 
         </div>
 
-        {/* SECTION 3: LOCATION ANCHOR (PUSHED DOWN) */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="location-anchor"
-        >
-          <div className="anchor-content">
-            <div className="info-block">
-              <label>The Destination</label>
-              <h3>Nakuru, Kenya</h3>
+        {/* FOOTER ANCHOR */}
+        <div className="location-anchor">
+            <div className="anchor-content">
+                <div><label>LOCATION</label><h3>Nakuru, Kenya</h3></div>
+                <div className="v-sep"></div>
+                <div><label>DATES</label><h3>23 - 25 Jan 2026</h3></div>
             </div>
-            <div className="v-divider"></div>
-            <div className="info-block">
-              <label>The Celebration</label>
-              <h3>23rd - 25th Jan 2026</h3>
-            </div>
-          </div>
-        </motion.div>
+        </div>
 
       </main>
-
       <Footer />
     </div>
   );

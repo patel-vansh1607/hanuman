@@ -1,28 +1,50 @@
 .premium-ticker-row {
-  /* Royal Maroon Gradient */
   background: linear-gradient(90deg, #2d0c01 0%, #4a0e0e 50%, #2d0c01 100%);
   border-bottom: 3px solid #F5D07E;
   color: #F5D07E;
   padding: 14px 0;
   width: 100%;
   font-family: 'Poppins', sans-serif;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  overflow: hidden; /* Hide the overflow */
+  position: relative;
 }
 
-.ticker-wrapper {
-  max-width: 1400px;
-  margin: 0 auto;
+/* Container that masks the scrolling content */
+.ticker-scroll-container {
+  width: 100%;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.centered-yajman {
+/* The moving track */
+.ticker-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 40px; /* Space between the repeating items */
+  animation: scroll-left 25s linear infinite;
+  padding-left: 20px;
+}
+
+/* Individual content blocks */
+.ticker-item {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
+/* Keyframes for the movement */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Move half the track length */
+}
+
+/* Pause animation on hover for readability */
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Refined Styles */
 .mini-badge {
   background: #F5D07E;
   color: #2d0c01;
@@ -31,14 +53,11 @@
   padding: 3px 12px;
   border-radius: 4px;
   letter-spacing: 2px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .yajman-text {
   font-size: 16px;
   font-weight: 600;
-  white-space: nowrap;
-  letter-spacing: 0.5px;
   display: flex;
   align-items: center;
 }
@@ -48,7 +67,7 @@
   opacity: 0.85;
   font-style: italic;
   margin-left: 8px;
-  color: #fff; /* White for organizational text contrast */
+  color: #fff;
 }
 
 .dot-sep {
@@ -58,19 +77,9 @@
   opacity: 0.6;
 }
 
-.secondary-name {
-  color: #F5D07E;
-}
-
-/* Mobile Responsiveness: Stacks on small screens but stays elegant */
-@media (max-width: 991px) {
-  .yajman-text {
-    flex-direction: column;
-    white-space: normal;
-    text-align: center;
-    gap: 5px;
-  }
-  .dot-sep { display: none; }
-  .mini-badge:last-child { display: none; }
-  .premium-ticker-row { padding: 15px 10px; }
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .premium-ticker-row { padding: 10px 0; }
+  .yajman-text { font-size: 14px; }
+  .ticker-track { animation-duration: 15s; } /* Slightly faster for mobile if desired */
 }
