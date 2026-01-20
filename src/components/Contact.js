@@ -4,6 +4,7 @@ import { Phone, MessageCircle, Info, Shield, Truck, Utensils, Music, Paintbrush,
 import Navbar from './Navbar';
 import Footer from './Footer';
 import '../styles/Contact.css';
+import NewsTicker from './NewsTicker';
 
 const Contact = () => {
   const wa = (num, name) => `https://wa.me/254${num.substring(1)}?text=Namaste%20${name},%20I%20am%20reaching%20out%20regarding%20the%20Hanuman%20Mahotsav.`;
@@ -28,6 +29,7 @@ const Contact = () => {
 
   return (
     <div className="contact-page-wrapper">
+      <NewsTicker />
       <Navbar />
       
       <main className="contact-main-content">
@@ -41,7 +43,7 @@ const Contact = () => {
             <div className="content-side">
               <span className="cursive-text">A message from the Chairman</span>
               <h1>Shaileshbhai Sheth</h1>
-              <p className="philosophy-text">"Our doors are always open, and our hearts are always ready to serve."</p>
+              <p className="philosophy-text">"May the divine presence of Lord Hanuman bless this sacred place with strength, devotion, and protection."</p>
               <a href={wa('0733638311', 'Shailesh%20Sheth')} target="_blank" rel="noreferrer" className="main-wa-btn">
                 <MessageCircle size={20} style={{marginRight: '8px'}} />
                 Connect on WhatsApp
