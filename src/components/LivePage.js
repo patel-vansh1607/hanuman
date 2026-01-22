@@ -55,7 +55,7 @@ const LivePage = ({ programmeId }) => {
             /* IF UPCOMING, SHOW YOUR "NOT READY" BOX */
             <div className="not-ready-box">
                <div className="temple-icon">🕉️</div>
-               <h2>Live Stream Not Available</h2>
+               <h2>Live Stream Not Available as of now</h2>
                <p>The spiritual proceedings for {data.title} are being prepared.</p>
                <div className="status-indicator"><span className="dot"></span> Monitoring...</div>
             </div>
