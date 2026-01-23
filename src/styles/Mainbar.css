@@ -96,3 +96,12 @@
 .stream-btn:not(.upcoming):hover .btn-text {
   color: #ffd700; /* Text turns Gold */
 }
+.replay-msg {
+  margin-top: 15px;
+  font-family: 'Poppins', sans-serif;
+  color: #2d0c01; /* Matches your button background color */
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

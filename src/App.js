@@ -21,7 +21,7 @@ const StatusBadge = ({ status }) => {
     );
   }
   if (status === 'completed') {
-    return <div className="status-badge done">✓ COMPLETED</div>;
+    return <div className="status-badge done">✓ COMPLETED- CLICK TO WATCH REPLAY</div>;
   }
   return <div className="status-badge upcoming">UPCOMING</div>;
 };
